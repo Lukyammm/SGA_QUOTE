@@ -3,21 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orçamento - NOVOSGA | NOHC</title>
+    <title>NOVOSGA - Sistema de Gestão de Atendimento</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;500;800&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #0066cc;
             --primary-dark: #004d99;
             --secondary: #00cc66;
-            --dark: #333;
+            --accent: #ff6b6b;
+            --dark: #2b2b2b;
             --light: #f8f9fa;
             --gray: #6c757d;
             --danger: #dc3545;
             --warning: #ffc107;
+            --success: #28a745;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
+            --border-radius: 12px;
         }
         
         * {
@@ -27,13 +30,33 @@
         }
         
         body {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'Poppins', sans-serif;
             line-height: 1.6;
             color: var(--dark);
             background-color: #f5f7fa;
             overflow-x: hidden;
+            min-height: 100vh;
         }
         
+        /* Efeito de partículas */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+        
+        /* Header */
         header {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
@@ -42,6 +65,8 @@
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            padding-bottom: 5rem;
         }
         
         header::before {
@@ -63,16 +88,18 @@
         }
         
         h1 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             margin-bottom: 0.5rem;
-            font-weight: 700;
+            font-weight: 800;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            font-family: 'Montserrat', sans-serif;
         }
         
         .subtitle {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
             opacity: 0.9;
             margin-bottom: 1rem;
+            font-weight: 300;
         }
         
         .logo-container {
@@ -80,29 +107,238 @@
             justify-content: center;
             align-items: center;
             gap: 2rem;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
             flex-wrap: wrap;
         }
         
         .logo {
-            height: 60px;
+            height: 80px;
             filter: brightness(0) invert(1);
             transition: var(--transition);
+            border-radius: var(--border-radius);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
         }
         
         .logo:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(-2deg);
         }
         
+        /* Container principal */
         .container {
             max-width: 1200px;
-            margin: 2rem auto;
+            margin: -3rem auto 2rem;
             padding: 0 1rem;
+            position: relative;
         }
         
+        /* Seção de senha */
+        .ticket-section {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.1);
+            transform: translateY(50px);
+            opacity: 0;
+            animation: fadeInUp 0.8s forwards 0.3s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        .ticket-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .ticket-header {
+            margin-bottom: 2rem;
+        }
+        
+        .ticket-header h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        .ticket-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+        }
+        
+        .ticket-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        select:focus, input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+        }
+        
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.2);
+            width: 100%;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 102, 204, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn-accent {
+            background: var(--accent);
+            box-shadow: 0 4px 6px rgba(255, 107, 107, 0.2);
+        }
+        
+        .btn-accent:hover {
+            background: #ff5252;
+        }
+        
+        /* Ticket display */
+        .ticket-display {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border: 2px dashed var(--primary);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 500px;
+            display: none;
+            transform: scale(0.9);
+            opacity: 0;
+            animation: ticketAppear 0.6s forwards 0.3s;
+        }
+        
+        @keyframes ticketAppear {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+        
+        .ticket-number {
+            font-size: 4rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin: 1rem 0;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .ticket-info {
+            background: white;
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: var(--shadow);
+        }
+        
+        .ticket-info p {
+            margin-bottom: 0.5rem;
+        }
+        
+        .ticket-info strong {
+            color: var(--primary);
+        }
+        
+        /* História do ticket anterior */
+        .ticket-history {
+            background: rgba(0, 102, 204, 0.05);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-left: 4px solid var(--primary);
+            display: none;
+        }
+        
+        .ticket-history h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .ticket-history ul {
+            list-style-position: inside;
+            margin-top: 1rem;
+        }
+        
+        .ticket-history li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Seção de orçamento (será mostrada depois) */
+        .budget-section {
+            display: none;
+            animation: fadeIn 1s forwards;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        /* Estilos do orçamento (manter os estilos anteriores) */
         section {
             background: white;
-            border-radius: 10px;
+            border-radius: var(--border-radius);
             padding: 2rem;
             margin-bottom: 2rem;
             box-shadow: var(--shadow);
@@ -135,6 +371,7 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
         }
         
         h2 i {
@@ -227,491 +464,404 @@
             100% { transform: scale(1); }
         }
         
-        .form-group {
-            margin-bottom: 1.5rem;
+        .negotiation-section {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border: 2px solid var(--primary);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 2rem;
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
         }
         
-        .checkbox-group {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            background: var(--light);
-            border-radius: 8px;
-            transition: var(--transition);
-            cursor: pointer;
-        }
-        
-        .checkbox-item:hover {
-            background: #e9ecef;
-        }
-        
-        .checkbox-item input {
-            margin-right: 1rem;
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-        
-        .checkbox-item label {
-            flex: 1;
-            cursor: pointer;
-        }
-        
-        .checkbox-item .price-change {
-            font-weight: 600;
-            color: var(--danger);
-            margin-left: 1rem;
-        }
-        
-        button {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            font-size: 1rem;
-            font-weight: 600;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: var(--transition);
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.2);
-        }
-        
-        button:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 102, 204, 0.3);
-        }
-        
-        button:active {
+        .negotiation-section.active {
+            display: block;
+            opacity: 1;
             transform: translateY(0);
         }
         
-        .btn-secondary {
-            background: var(--gray);
-            box-shadow: 0 4px 6px rgba(108, 117, 125, 0.2);
+        .negotiation-item {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
         
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-        
-        .btn-success {
-            background: var(--secondary);
-            box-shadow: 0 4px 6px rgba(0, 204, 102, 0.2);
-        }
-        
-        .btn-success:hover {
-            background: #00b359;
-        }
-        
-        .action-buttons {
+        .slider-container {
             display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-        
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .timeline::before {
-            content: "";
-            position: absolute;
-            left: 7px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--primary);
-        }
-        
-        .timeline-item {
-            position: relative;
-            padding-bottom: 1.5rem;
-        }
-        
-        .timeline-item:last-child {
-            padding-bottom: 0;
-        }
-        
-        .timeline-dot {
-            position: absolute;
-            left: 0;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--primary);
-            transform: translateX(-50%);
-        }
-        
-        .timeline-content {
-            padding-left: 1.5rem;
-        }
-        
-        .timeline-date {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.3rem;
-        }
-        
-        .progress-container {
-            margin: 2rem 0;
-        }
-        
-        .progress-bar {
-            height: 10px;
-            background: #e9ecef;
-            border-radius: 5px;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-        
-        .progress {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 0;
-            transition: width 1s ease;
-        }
-        
-        .progress-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            justify-content: center;
             align-items: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+            gap: 1rem;
         }
         
-        .modal.show {
-            display: flex;
+        .slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 10px;
+            border-radius: 5px;
+            background: #e9ecef;
+            outline: none;
+            opacity: 0.7;
+            transition: opacity .2s;
+        }
+        
+        .slider:hover {
             opacity: 1;
         }
         
-        .modal-content {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            transform: translateY(-20px);
-            transition: transform 0.3s ease;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-        }
-        
-        .modal.show .modal-content {
-            transform: translateY(0);
-        }
-        
-        .close-modal {
-            position: absolute;
-            top: 1rem;
-            right: 1rem;
-            font-size: 1.5rem;
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: var(--primary);
             cursor: pointer;
-            color: var(--gray);
-            background: none;
-            border: none;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
         
-        .modal h3 {
-            margin-bottom: 1rem;
-            color: var(--primary);
+        .reduction-value {
+            font-weight: bold;
+            color: var(--danger);
+            min-width: 80px;
+            text-align: right;
         }
         
-        footer {
-            background: var(--dark);
-            color: white;
+        .negotiation-header {
             text-align: center;
-            padding: 2rem 1rem;
-            margin-top: 3rem;
+            position: relative;
+            margin-bottom: 2rem;
         }
         
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
+        .negotiation-header h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            animation: textScale 1.5s infinite alternate;
         }
         
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin: 1rem 0;
-            flex-wrap: wrap;
+        @keyframes textScale {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
         }
         
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
+        .dynamic-price {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 2rem 0;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pricePulse 2s infinite;
         }
         
-        .copyright {
-            margin-top: 1.5rem;
-            opacity: 0.7;
-            font-size: 0.9rem;
+        @keyframes pricePulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { opacity: 1; }
         }
         
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            pointer-events: none;
+        }
+        
+        /* Responsividade */
         @media (max-width: 768px) {
             h1 {
-                font-size: 2rem;
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .ticket-section {
+                padding: 2rem 1rem;
+            }
+            
+            .ticket-number {
+                font-size: 3rem;
             }
             
             .info-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .price-tag, .final-price {
-                font-size: 2rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            button {
-                width: 100%;
-            }
         }
         
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Efeitos especiais */
+        .floating {
+            animation: floating 3s ease-in-out infinite;
         }
         
-        section {
-            animation: fadeIn 0.6s ease forwards;
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
         
-        section:nth-child(1) { animation-delay: 0.1s; }
-        section:nth-child(2) { animation-delay: 0.2s; }
-        section:nth-child(3) { animation-delay: 0.3s; }
-        section:nth-child(4) { animation-delay: 0.4s; }
-        
-        /* Print styles */
-        @media print {
-            body {
-                background: white;
-                color: black;
-                font-size: 12pt;
-            }
-            
-            header, section {
-                box-shadow: none;
-                margin: 0;
-                padding: 1rem;
-                page-break-inside: avoid;
-            }
-            
-            button, .action-buttons, footer {
-                display: none;
-            }
-            
-            .final-price {
-                color: black;
-                animation: none;
-            }
+        .pulse {
+            animation: pulse 2s infinite;
         }
     </style>
 </head>
 <body>
+    <!-- Efeito de partículas -->
+    <div class="particles" id="particles"></div>
+    
+    <!-- Header -->
     <header>
         <div class="header-content">
-            <h1>Orçamento para Desenvolvimento do Sistema NOVOSGA</h1>
-            <p class="subtitle">Sistema de Gestão de Atendimento - Núcleo de Oncologia e Hematologia do Ceará</p>
+            <h1>NOVOSGA</h1>
+            <p class="subtitle">Sistema de Gestão de Atendimento Hospitalar</p>
             <div class="logo-container">
-                <img src="https://via.placeholder.com/150x60?text=NOVOSGA" alt="NOVOSGA Logo" class="logo">
-                <img src="https://via.placeholder.com/150x60?text=NOHC" alt="NOHC Logo" class="logo">
+                <img src="https://cdn.rawgit.com/novosga/art/39bf72ac/dist/logo_1200x630.png" alt="NOVOSGA Logo" class="logo floating">
+                <i class="fas fa-hospital-alt fa-4x pulse" style="color: white;"></i>
             </div>
         </div>
     </header>
     
+    <!-- Container principal -->
     <div class="container">
-        <section id="descricao">
-            <h2><i class="fas fa-list-check"></i> Escopo do Projeto</h2>
-            <p>Implementação completa do sistema NOVOSGA para otimização do fluxo de atendimento e gestão de pacientes no NOHC.</p>
-            
-            <ul>
-                <li><i class="fas fa-code"></i> Desenvolvimento e personalização do sistema conforme necessidades específicas</li>
-                <li><i class="fas fa-server"></i> Instalação e configuração em todas as máquinas da rede</li>
-                <li><i class="fas fa-bug"></i> Testes de estresse e qualidade em ambiente controlado</li>
-                <li><i class="fas fa-graduation-cap"></i> Treinamento completo da equipe (8 horas)</li>
-                <li><i class="fas fa-user-tie"></i> Acompanhamento presencial por 3 dias úteis</li>
-                <li><i class="fas fa-file-contract"></i> Entrega de documentação técnica e de usuário</li>
-                <li><i class="fas fa-headset"></i> Suporte pós-instalação por 3 meses (remoto e presencial)</li>
-                <li><i class="fas fa-shield-alt"></i> Garantia de 6 meses para correção de bugs</li>
-            </ul>
-            
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Fase 1 - Planejamento (1 semana)</div>
-                        <p>Análise de requisitos e planejamento da implementação</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Fase 2 - Desenvolvimento (2 semanas)</div>
-                        <p>Customização e adaptação do sistema</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Fase 3 - Implementação (1 semana)</div>
-                        <p>Instalação, configuração e migração de dados</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <div class="timeline-date">Fase 4 - Treinamento (2 dias)</div>
-                        <p>Capacitação da equipe e entrega da documentação</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="orcamento">
-            <h2><i class="fas fa-file-invoice-dollar"></i> Orçamento</h2>
-            
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3>Cliente</h3>
-                    <p>NOHC - Núcleo de Oncologia e Hematologia do Ceará</p>
-                </div>
-                <div class="info-card">
-                    <h3>Profissionais</h3>
-                    <p>Lukyam Madeira e Aurélio Neto</p>
-                </div>
-                <div class="info-card">
-                    <h3>Data</h3>
-                    <p>31/03/2025</p>
-                </div>
-                <div class="info-card">
-                    <h3>Validade</h3>
-                    <p>30 dias</p>
-                </div>
+        <!-- Seção de senha -->
+        <section class="ticket-section">
+            <div class="ticket-header">
+                <h2><i class="fas fa-ticket-alt"></i> Atendimento Virtual</h2>
+                <p>Preencha os campos abaixo para gerar sua senha de atendimento</p>
             </div>
             
-            <div class="price-tag">10.000,00</div>
-            
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress" id="payment-progress"></div>
-                </div>
-                <div class="progress-labels">
-                    <span>Assinatura: R$ 5.000,00</span>
-                    <span>Conclusão: R$ 5.000,00</span>
-                </div>
-            </div>
-            
-            <p><strong>Forma de pagamento:</strong> 50% na assinatura do contrato e 50% na conclusão e aceitação do projeto.</p>
-        </section>
-        
-        <section id="beneficios">
-            <h2><i class="fas fa-star"></i> Benefícios</h2>
-            
-            <div class="info-grid">
-                <div class="info-card">
-                    <h3><i class="fas fa-clock"></i> Otimização de Tempo</h3>
-                    <p>Redução de até 40% no tempo de atendimento aos pacientes</p>
-                </div>
-                <div class="info-card">
-                    <h3><i class="fas fa-chart-line"></i> Gestão Eficiente</h3>
-                    <p>Controle completo dos fluxos e indicadores de atendimento</p>
-                </div>
-                <div class="info-card">
-                    <h3><i class="fas fa-users"></i> Experiência do Paciente</h3>
-                    <p>Melhoria significativa na experiência do paciente</p>
-                </div>
-                <div class="info-card">
-                    <h3><i class="fas fa-database"></i> Dados Integrados</h3>
-                    <p>Centralização de informações para melhor tomada de decisão</p>
-                </div>
-            </div>
-        </section>
-        
-        <section id="negociacao">
-            <h2><i class="fas fa-handshake"></i> Negociação</h2>
-            <p>Personalize sua proposta selecionando as opções abaixo para ajustar o valor:</p>
-            
-            <form id="form-negociacao">
+            <div class="ticket-form" id="ticket-form">
                 <div class="form-group">
-                    <div class="checkbox-group">
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="garantia" id="garantia" value="-1000">
-                            <label for="garantia">Reduzir tempo de garantia de 6 para 3 meses</label>
-                            <span class="price-change">- R$ 1.000,00</span>
+                    <label for="name">Seu Nome</label>
+                    <input type="text" id="name" placeholder="Digite seu nome completo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="specialty">Especialidade</label>
+                    <select id="specialty">
+                        <option value="">Selecione uma especialidade</option>
+                        <option value="TI">Tecnologia da Informação</option>
+                        <option value="ADM">Administração</option>
+                        <option value="SAUDE">Saúde e Enfermagem</option>
+                        <option value="FIN">Financeiro</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Assunto</label>
+                    <select id="subject">
+                        <option value="">Selecione um assunto</option>
+                        <option value="otimizar">Otimizar o atendimento do meu hospital</option>
+                        <option value="implantar">Implantar novo sistema</option>
+                        <option value="treinar">Treinamento da equipe</option>
+                        <option value="suporte">Necessidade de suporte</option>
+                    </select>
+                </div>
+                
+                <button class="btn btn-accent" id="generate-ticket">
+                    <i class="fas fa-ticket-alt"></i> Gerar Senha
+                </button>
+            </div>
+            
+            <div class="ticket-display" id="ticket-display">
+                <h3>Sua Senha de Atendimento</h3>
+                <div class="ticket-number" id="ticket-number">002</div>
+                <div class="ticket-info">
+                    <p><strong>Nome:</strong> <span id="display-name">Fulano de Tal</span></p>
+                    <p><strong>Especialidade:</strong> <span id="display-specialty">Tecnologia da Informação</span></p>
+                    <p><strong>Assunto:</strong> <span id="display-subject">Otimizar o atendimento do meu hospital</span></p>
+                    <p><strong>Data:</strong> <span id="display-date">31/03/2025</span></p>
+                </div>
+                
+                <div class="ticket-history" id="ticket-history">
+                    <h3><i class="fas fa-history"></i> História da Senha #001</h3>
+                    <p>O sistema NOVOSGA foi implementado com sucesso no <strong>Hospital Estadual Leonardo da Vinci</strong>, transformando completamente o fluxo de atendimento da instituição.</p>
+                    
+                    <p>Como resultado:</p>
+                    <ul>
+                        <li>Redução de 40% no tempo de espera dos pacientes</li>
+                        <li>Centralização de 5 sistemas diferentes em uma única plataforma</li>
+                        <li>Treinamento de 120 colaboradores em 3 turnos diferentes</li>
+                        <li>Correção de 23 bugs críticos identificados durante a implantação</li>
+                        <li>Suporte contínuo por 6 meses após a implementação</li>
+                    </ul>
+                    
+                    <p>Hoje, mais de 2 anos depois, o sistema continua operando com excelência, atendendo mais de 500 pacientes diariamente e integrado com o NAC (Núcleo de Acreditação Clínica).</p>
+                </div>
+                
+                <button class="btn" id="call-ticket">
+                    <i class="fas fa-bell"></i> Chamar Senha para Atendimento
+                </button>
+            </div>
+        </section>
+        
+        <!-- Seção de orçamento (inicialmente oculta) -->
+        <div class="budget-section" id="budget-section">
+            <section id="descricao">
+                <h2><i class="fas fa-list-check"></i> Escopo do Projeto</h2>
+                <p>Implementação completa do sistema NOVOSGA para otimização do fluxo de atendimento e gestão de pacientes no NOHC.</p>
+                
+                <ul>
+                    <li><i class="fas fa-code"></i> Desenvolvimento e personalização do sistema conforme necessidades específicas</li>
+                    <li><i class="fas fa-server"></i> Instalação e configuração em todas as máquinas da rede</li>
+                    <li><i class="fas fa-bug"></i> Testes de estresse e qualidade em ambiente controlado</li>
+                    <li><i class="fas fa-graduation-cap"></i> Treinamento completo da equipe (8 horas)</li>
+                    <li><i class="fas fa-user-tie"></i> Acompanhamento presencial por 3 dias úteis</li>
+                    <li><i class="fas fa-file-contract"></i> Entrega de documentação técnica e de usuário</li>
+                    <li><i class="fas fa-headset"></i> Suporte pós-instalação por 3 meses (remoto e presencial)</li>
+                    <li><i class="fas fa-shield-alt"></i> Garantia de 6 meses para correção de bugs</li>
+                </ul>
+                
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Fase 1 - Planejamento (1 semana)</div>
+                            <p>Análise de requisitos e planejamento da implementação</p>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="suporte" id="suporte" value="-500">
-                            <label for="suporte">Reduzir suporte presencial de 3 para 1 dia</label>
-                            <span class="price-change">- R$ 500,00</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Fase 2 - Desenvolvimento (2 semanas)</div>
+                            <p>Customização e adaptação do sistema</p>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="treinamento" id="treinamento" value="-500">
-                            <label for="treinamento">Reduzir treinamento de 8 para 4 horas</label>
-                            <span class="price-change">- R$ 500,00</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Fase 3 - Implementação (1 semana)</div>
+                            <p>Instalação, configuração e migração de dados</p>
                         </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="documentacao" id="documentacao" value="-300">
-                            <label for="documentacao">Documentação apenas técnica (sem manual do usuário)</label>
-                            <span class="price-change">- R$ 300,00</span>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">Fase 4 - Treinamento (2 dias)</div>
+                            <p>Capacitação da equipe e entrega da documentação</p>
                         </div>
                     </div>
                 </div>
+            </section>
+            
+            <section id="orcamento">
+                <h2><i class="fas fa-file-invoice-dollar"></i> Orçamento</h2>
                 
-                <div class="final-price" id="valor-final">R$ 10.000,00</div>
-                
-                <div class="action-buttons">
-                    <button type="button" id="botao-negociar">
-                        <i class="fas fa-calculator"></i> Calcular Novo Valor
-                    </button>
-                    <button type="button" id="botao-imprimir" class="btn-secondary">
-                        <i class="fas fa-print"></i> Imprimir Orçamento
-                    </button>
-                    <button type="button" id="botao-contato" class="btn-success">
-                        <i class="fas fa-paper-plane"></i> Enviar Proposta
-                    </button>
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3>Cliente</h3>
+                        <p>NOHC - Núcleo de Oncologia e Hematologia do Ceará</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Profissionais</h3>
+                        <p>Lukyam Madeira e Aurélio Neto</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Data</h3>
+                        <p>31/03/2025</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Validade</h3>
+                        <p>30 dias</p>
+                    </div>
                 </div>
-            </form>
-        </section>
+                
+                <div class="price-tag">10.000,00</div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress" id="payment-progress"></div>
+                    </div>
+                    <div class="progress-labels">
+                        <span>Assinatura: R$ 5.000,00</span>
+                        <span>Conclusão: R$ 5.000,00</span>
+                    </div>
+                </div>
+                
+                <p><strong>Forma de pagamento:</strong> 50% na assinatura do contrato e 50% na conclusão e aceitação do projeto.</p>
+            </section>
+            
+            <section id="beneficios">
+                <h2><i class="fas fa-star"></i> Benefícios</h2>
+                
+                <div class="info-grid">
+                    <div class="info-card">
+                        <h3><i class="fas fa-clock"></i> Otimização de Tempo</h3>
+                        <p>Redução de até 40% no tempo de atendimento aos pacientes</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-chart-line"></i> Gestão Eficiente</h3>
+                        <p>Controle completo dos fluxos e indicadores de atendimento</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-users"></i> Experiência do Paciente</h3>
+                        <p>Melhoria significativa na experiência do paciente</p>
+                    </div>
+                    <div class="info-card">
+                        <h3><i class="fas fa-database"></i> Dados Integrados</h3>
+                        <p>Centralização de informações para melhor tomada de decisão</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="negociacao-avancada">
+                <h2><i class="fas fa-handshake"></i> Negociação Personalizada</h2>
+                
+                <button class="btn" id="iniciar-negociacao" style="width: 100%; padding: 1.5rem;">
+                    <i class="fas fa-handshake"></i> Negociar Valor Personalizado
+                </button>
+
+                <div class="negotiation-section" id="area-negociacao">
+                    <div class="negotiation-header">
+                        <h3>Vamos Negociar! 🚀</h3>
+                        <p>Ajuste os controles abaixo para personalizar seu pacote:</p>
+                    </div>
+
+                    <div class="negotiation-item">
+                        <h4><i class="fas fa-user-tie"></i> Acompanhamento Presencial</h4>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="acompanhamento" min="0" max="3" value="3">
+                            <span class="reduction-value" id="acompanhamento-valor">0% (R$ 0,00)</span>
+                        </div>
+                    </div>
+
+                    <div class="negotiation-item">
+                        <h4><i class="fas fa-headset"></i> Meses de Suporte</h4>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="suporte" min="0" max="3" value="3">
+                            <span class="reduction-value" id="suporte-valor">0% (R$ 0,00)</span>
+                        </div>
+                    </div>
+
+                    <div class="negotiation-item">
+                        <h4><i class="fas fa-graduation-cap"></i> Horas de Treinamento</h4>
+                        <div class="slider-container">
+                            <input type="range" class="slider" id="treinamento" min="4" max="8" value="8">
+                            <span class="reduction-value" id="treinamento-valor">0% (R$ 0,00)</span>
+                        </div>
+                    </div>
+
+                    <div class="dynamic-price" id="preco-dinamico">
+                        R$ 10.000,00
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn-success" id="confirmar-negociacao">
+                            <i class="fas fa-check-circle"></i> Confirmar Novo Valor
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
     </div>
     
     <footer>
         <div class="footer-content">
-            <h3>Entre em Contato</h3>
+            <h3>NOVOSGA - Sistema de Gestão de Atendimento</h3>
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
@@ -730,107 +880,190 @@
         </div>
     </footer>
     
-    <div class="modal" id="contact-modal">
-        <div class="modal-content">
-            <button class="close-modal">&times;</button>
-            <h3>Enviar Proposta</h3>
-            <p>Preencha seus dados para enviarmos a proposta formal:</p>
-            <form id="contact-form">
-                <div class="form-group">
-                    <label for="name">Nome completo</label>
-                    <input type="text" id="name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Telefone</label>
-                    <input type="tel" id="phone" class="form-control" required>
-                </div>
-                <button type="submit" class="btn-success">
-                    <i class="fas fa-paper-plane"></i> Enviar Proposta
-                </button>
-            </form>
-        </div>
-    </div>
-    
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize payment progress animation
+            // Criar partículas
+            const particlesContainer = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                particle.style.width = `${Math.random() * 10 + 5}px`;
+                particle.style.height = particle.style.width;
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                particle.style.animation = `float ${Math.random() * 10 + 5}s linear infinite`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                particle.style.opacity = Math.random() * 0.5 + 0.1;
+                particlesContainer.appendChild(particle);
+            }
+            
+            // Inicializar progresso de pagamento
             setTimeout(() => {
                 document.getElementById('payment-progress').style.width = '50%';
             }, 500);
             
-            // Negotiation functionality
-            const negotiateBtn = document.getElementById('botao-negociar');
-            const finalPriceEl = document.getElementById('valor-final');
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            
-            negotiateBtn.addEventListener('click', function() {
-                let valorBase = 10000;
-                
-                checkboxes.forEach(checkbox => {
-                    if (checkbox.checked) {
-                        valorBase += parseInt(checkbox.value);
-                    }
-                });
-                
-                // Format price with Brazilian Real format
-                finalPriceEl.textContent = `R$ ${valorBase.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
-                
-                // Add animation
-                finalPriceEl.style.animation = 'none';
-                void finalPriceEl.offsetWidth; // Trigger reflow
-                finalPriceEl.style.animation = 'pulse 0.5s';
-            });
-            
-            // Print functionality
-            document.getElementById('botao-imprimir').addEventListener('click', function() {
-                window.print();
-            });
-            
-            // Contact modal functionality
-            const contactModal = document.getElementById('contact-modal');
-            const openModalBtn = document.getElementById('botao-contato');
-            const closeModalBtn = document.querySelector('.close-modal');
-            
-            openModalBtn.addEventListener('click', function() {
-                contactModal.classList.add('show');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            closeModalBtn.addEventListener('click', function() {
-                contactModal.classList.remove('show');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Close modal when clicking outside
-            contactModal.addEventListener('click', function(e) {
-                if (e.target === contactModal) {
-                    contactModal.classList.remove('show');
-                    document.body.style.overflow = 'auto';
+            // Configurar negociação
+            const negotiationItems = {
+                acompanhamento: {
+                    max: 3,
+                    value: 3,
+                    pricePerDay: 1000,
+                    element: document.getElementById('acompanhamento-valor')
+                },
+                suporte: {
+                    max: 3,
+                    value: 3,
+                    pricePerMonth: 1500,
+                    element: document.getElementById('suporte-valor')
+                },
+                treinamento: {
+                    min: 4,
+                    max: 8,
+                    value: 8,
+                    pricePerHour: 200,
+                    element: document.getElementById('treinamento-valor')
                 }
+            };
+
+            let basePrice = 10000;
+            let currentPrice = basePrice;
+
+            document.getElementById('iniciar-negociacao').addEventListener('click', function() {
+                const section = document.getElementById('area-negociacao');
+                section.classList.add('active');
+                createConfetti();
             });
-            
-            // Contact form submission
-            document.getElementById('contact-form').addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Proposta enviada com sucesso! Entraremos em contato em breve.');
-                contactModal.classList.remove('show');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Add hover effect to checkbox items
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener('change', function() {
-                    const parent = this.closest('.checkbox-item');
-                    if (this.checked) {
-                        parent.style.backgroundColor = '#f8d7da';
+
+            function updatePrice() {
+                let totalReduction = 0;
+
+                // Calcular redução para cada item
+                totalReduction += (negotiationItems.acompanhamento.max - negotiationItems.acompanhamento.value) * negotiationItems.acompanhamento.pricePerDay;
+                totalReduction += (negotiationItems.suporte.max - negotiationItems.suporte.value) * negotiationItems.suporte.pricePerMonth;
+                totalReduction += (negotiationItems.treinamento.max - negotiationItems.treinamento.value) * negotiationItems.treinamento.pricePerHour;
+
+                currentPrice = basePrice - totalReduction;
+                if(currentPrice < basePrice * 0.7) {
+                    document.getElementById('preco-dinamico').style.background = 'linear-gradient(45deg, var(--danger), var(--warning))';
+                } else {
+                    document.getElementById('preco-dinamico').style.background = 'linear-gradient(45deg, var(--primary), var(--secondary))';
+                }
+
+                document.getElementById('preco-dinamico').textContent = 
+                    `R$ ${currentPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+            }
+
+            function createConfetti() {
+                for(let i = 0; i < 50; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.classList.add('confetti');
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = Math.random() * 100 + 'vh';
+                    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
+                    confetti.style.opacity = '0.7';
+                    document.body.appendChild(confetti);
+                    
+                    // Remover após animação
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 3000);
+                }
+            }
+
+            // Configurar listeners para os sliders
+            document.querySelectorAll('.slider').forEach(slider => {
+                slider.addEventListener('input', function() {
+                    const item = negotiationItems[this.id];
+                    item.value = parseInt(this.value);
+                    
+                    // Calcular porcentagem e valor
+                    let percentage = 0;
+                    let reduction = 0;
+
+                    if(this.id === 'treinamento') {
+                        reduction = (item.max - item.value) * item.pricePerHour;
+                        percentage = ((item.max - item.value) / (item.max - item.min)) * 100;
                     } else {
-                        parent.style.backgroundColor = '';
+                        reduction = (item.max - item.value) * item[`pricePer${this.id === 'acompanhamento' ? 'Day' : 'Month'}`];
+                        percentage = ((item.max - item.value) / item.max) * 100;
                     }
+
+                    item.element.textContent = 
+                        `${Math.round(percentage)}% (R$ ${reduction.toLocaleString('pt-BR', {minimumFractionDigits: 2})})`;
+
+                    updatePrice();
                 });
+            });
+
+            document.getElementById('confirmar-negociacao').addEventListener('click', function() {
+                document.getElementById('valor-final').textContent = 
+                    `R$ ${currentPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+                
+                const modal = document.createElement('div');
+                modal.className = 'custom-modal';
+                modal.innerHTML = `
+                    <div class="modal-content">
+                        <h3>Negociação Confirmada! ✅</h3>
+                        <p>Novo valor: R$ ${currentPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
+                        <button onclick="this.parentElement.parentElement.remove()">Fechar</button>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+            });
+            
+            // Gerar senha
+            document.getElementById('generate-ticket').addEventListener('click', function() {
+                const name = document.getElementById('name').value;
+                const specialty = document.getElementById('specialty').value;
+                const subject = document.getElementById('subject').value;
+                
+                if(!name || !specialty || !subject) {
+                    alert('Por favor, preencha todos os campos!');
+                    return;
+                }
+                
+                // Atualizar display
+                document.getElementById('display-name').textContent = name;
+                document.getElementById('display-specialty').textContent = 
+                    document.querySelector('#specialty option:checked').text;
+                document.getElementById('display-subject').textContent = 
+                    document.querySelector('#subject option:checked').text;
+                
+                const today = new Date();
+                document.getElementById('display-date').textContent = 
+                    `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth()+1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+                
+                // Mostrar ticket
+                document.getElementById('ticket-form').style.display = 'none';
+                document.getElementById('ticket-display').style.display = 'block';
+                document.getElementById('ticket-history').style.display = 'block';
+                
+                // Efeito de impressão
+                const ticketNumber = document.getElementById('ticket-number');
+                ticketNumber.style.transform = 'scale(0)';
+                setTimeout(() => {
+                    ticketNumber.style.transition = 'transform 0.5s ease-out';
+                    ticketNumber.style.transform = 'scale(1) rotate(360deg)';
+                }, 100);
+            });
+            
+            // Chamar senha para atendimento
+            document.getElementById('call-ticket').addEventListener('click', function() {
+                // Efeito de saída
+                document.querySelector('.ticket-section').style.animation = 'fadeOut 0.5s forwards';
+                
+                // Mostrar orçamento após delay
+                setTimeout(() => {
+                    document.querySelector('.ticket-section').style.display = 'none';
+                    document.getElementById('budget-section').style.display = 'block';
+                    
+                    // Animação de entrada do orçamento
+                    const sections = document.querySelectorAll('#budget-section section');
+                    sections.forEach((section, index) => {
+                        section.style.animation = `fadeInUp 0.5s forwards ${index * 0.2}s`;
+                    });
+                }, 500);
             });
         });
     </script>
