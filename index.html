@@ -3,24 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVOSGA - Sistema de Gestão de Atendimento</title>
+    <title>NOVOSGA PRO | Sistema de Gestão Hospitalar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;500;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0066cc;
-            --primary-dark: #004d99;
-            --secondary: #00cc66;
+            --primary: #0066ff;
+            --primary-dark: #0052cc;
+            --secondary: #00ff88;
             --accent: #ff6b6b;
-            --dark: #2b2b2b;
-            --light: #f8f9fa;
-            --gray: #6c757d;
-            --danger: #dc3545;
-            --warning: #ffc107;
-            --success: #28a745;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-            --border-radius: 12px;
+            --dark: #121212;
+            --darker: #0a0a0a;
+            --light: #f0f0f0;
+            --gray: #444;
+            --light-gray: #222;
+            --danger: #ff4444;
+            --warning: #ffbb33;
+            --success: #00C851;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --border-radius: 8px;
+            --glow: 0 0 15px rgba(0, 102, 255, 0.5);
         }
         
         * {
@@ -30,12 +33,15 @@
         }
         
         body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: var(--dark);
-            background-color: #f5f7fa;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.7;
+            color: var(--light);
+            background-color: var(--darker);
             overflow-x: hidden;
             min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(0, 255, 136, 0.1) 0%, transparent 50%);
         }
         
         /* Efeito de partículas */
@@ -53,20 +59,19 @@
             position: absolute;
             background: var(--primary);
             border-radius: 50%;
-            opacity: 0.3;
+            opacity: 0.5;
         }
         
         /* Header */
         header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            background: linear-gradient(135deg, var(--dark), var(--darker));
             color: white;
-            padding: 2rem 1rem;
+            padding: 3rem 1rem;
             text-align: center;
             position: relative;
             overflow: hidden;
             box-shadow: var(--shadow);
-            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
-            padding-bottom: 5rem;
+            border-bottom: 1px solid rgba(0, 102, 255, 0.3);
         }
         
         header::before {
@@ -76,8 +81,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
-            opacity: 0.5;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgwLDEwMiwyNTUsMC4wNSkiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=');
+            opacity: 0.3;
         }
         
         .header-content {
@@ -87,72 +92,86 @@
             margin: 0 auto;
         }
         
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-            font-weight: 800;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        h1, h2, h3, h4 {
             font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: var(--glow);
         }
         
         .subtitle {
             font-size: 1.4rem;
-            opacity: 0.9;
-            margin-bottom: 1rem;
+            opacity: 0.8;
+            margin-bottom: 2rem;
             font-weight: 300;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .logo-container {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 2rem;
-            margin: 2rem 0;
+            gap: 3rem;
+            margin: 3rem 0;
             flex-wrap: wrap;
         }
         
         .logo {
-            height: 80px;
-            filter: brightness(0) invert(1);
+            height: 100px;
             transition: var(--transition);
             border-radius: var(--border-radius);
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            filter: drop-shadow(0 0 10px rgba(0, 102, 255, 0.5));
         }
         
         .logo:hover {
-            transform: scale(1.05) rotate(-2deg);
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 15px rgba(0, 255, 136, 0.5));
+        }
+        
+        .hospital-icon {
+            font-size: 5rem;
+            color: var(--primary);
+            text-shadow: var(--glow);
+            transition: var(--transition);
+        }
+        
+        .hospital-icon:hover {
+            color: var(--secondary);
+            transform: scale(1.1);
         }
         
         /* Container principal */
         .container {
             max-width: 1200px;
-            margin: -3rem auto 2rem;
-            padding: 0 1rem;
+            margin: 0 auto;
+            padding: 0 2rem;
             position: relative;
         }
         
         /* Seção de senha */
         .ticket-section {
-            background: white;
+            background: rgba(18, 18, 18, 0.8);
             border-radius: var(--border-radius);
             padding: 3rem;
-            margin-bottom: 2rem;
+            margin: 3rem auto;
             box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
             text-align: center;
-            border: 1px solid rgba(0,0,0,0.1);
-            transform: translateY(50px);
-            opacity: 0;
-            animation: fadeInUp 0.8s forwards 0.3s;
-        }
-        
-        @keyframes fadeInUp {
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            backdrop-filter: blur(10px);
+            max-width: 1000px;
         }
         
         .ticket-section::before {
@@ -161,24 +180,39 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 10px;
+            height: 4px;
             background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
         .ticket-header {
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
         }
         
         .ticket-header h2 {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            color: var(--light);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .ticket-header h2::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
         }
         
         .ticket-header p {
             color: var(--gray);
             font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         .ticket-form {
@@ -187,56 +221,78 @@
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
             text-align: left;
         }
         
         label {
             display: block;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
             font-weight: 600;
-            color: var(--dark);
+            color: var(--light);
+            font-size: 1.1rem;
         }
         
         select, input {
             width: 100%;
-            padding: 1rem;
-            border: 2px solid #e9ecef;
+            padding: 1.2rem;
+            border: 1px solid var(--gray);
             border-radius: var(--border-radius);
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
             font-size: 1rem;
             transition: var(--transition);
+            background: rgba(30, 30, 30, 0.8);
+            color: var(--light);
         }
         
         select:focus, input:focus {
             border-color: var(--primary);
             outline: none;
-            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.3);
+            background: rgba(40, 40, 40, 0.8);
         }
         
         .btn {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border: none;
-            padding: 1rem 2rem;
+            padding: 1.3rem 2.5rem;
             font-size: 1.1rem;
             font-weight: 600;
-            border-radius: 50px;
+            border-radius: var(--border-radius);
             cursor: pointer;
             transition: var(--transition);
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.2);
+            gap: 0.8rem;
+            box-shadow: var(--shadow);
             width: 100%;
             margin-top: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: var(--transition);
         }
         
         .btn:hover {
-            background: var(--primary-dark);
             transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 10px 25px rgba(0, 102, 255, 0.4);
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn:active {
@@ -244,26 +300,28 @@
         }
         
         .btn-accent {
-            background: var(--accent);
-            box-shadow: 0 4px 6px rgba(255, 107, 107, 0.2);
+            background: linear-gradient(135deg, var(--accent), #ff5252);
         }
         
         .btn-accent:hover {
-            background: #ff5252;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.4);
         }
         
         /* Ticket display */
         .ticket-display {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            border: 2px dashed var(--primary);
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(0, 102, 255, 0.3);
             border-radius: var(--border-radius);
-            padding: 2rem;
-            margin: 2rem auto;
-            max-width: 500px;
+            padding: 3rem;
+            margin: 3rem auto;
+            max-width: 700px;
             display: none;
-            transform: scale(0.9);
+            transform: scale(0.95);
             opacity: 0;
             animation: ticketAppear 0.6s forwards 0.3s;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
         }
         
         @keyframes ticketAppear {
@@ -273,109 +331,166 @@
             }
         }
         
+        .ticket-display::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDQ1KSI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMCwxMDIsMjU1LDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=');
+            opacity: 0.3;
+        }
+        
         .ticket-number {
-            font-size: 4rem;
+            font-size: 5rem;
             font-weight: 800;
-            color: var(--primary);
-            margin: 1rem 0;
-            text-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            color: transparent;
+            margin: 1.5rem 0;
+            text-shadow: none;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .ticket-number::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 3px;
         }
         
         .ticket-info {
-            background: white;
+            background: rgba(40, 40, 40, 0.6);
             border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin: 1rem 0;
+            padding: 2rem;
+            margin: 2rem 0;
             box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            text-align: left;
         }
         
         .ticket-info p {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
+            line-height: 1.8;
         }
         
         .ticket-info strong {
             color: var(--primary);
+            font-weight: 600;
         }
         
         /* História do ticket anterior */
         .ticket-history {
-            background: rgba(0, 102, 204, 0.05);
+            background: rgba(0, 102, 255, 0.05);
             border-radius: var(--border-radius);
-            padding: 2rem;
-            margin: 2rem 0;
+            padding: 2.5rem;
+            margin: 2.5rem 0;
             border-left: 4px solid var(--primary);
             display: none;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(3px);
+        }
+        
+        .ticket-history::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iODAiIGhlaWdodD0iODAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDAsMTAyLDI1NSwwLjAyKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI3BhdHRlcm4pIi8+PC9zdmc+');
+            opacity: 0.2;
         }
         
         .ticket-history h3 {
             color: var(--primary);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 1rem;
+            font-size: 1.8rem;
+        }
+        
+        .ticket-history h3 i {
+            font-size: 2rem;
         }
         
         .ticket-history ul {
             list-style-position: inside;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
         
         .ticket-history li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            padding-left: 1.5rem;
         }
         
-        /* Seção de orçamento (será mostrada depois) */
+        .ticket-history li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        
+        /* Seção de orçamento */
         .budget-section {
             display: none;
             animation: fadeIn 1s forwards;
         }
         
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        
-        /* Estilos do orçamento (manter os estilos anteriores) */
         section {
-            background: white;
+            background: rgba(18, 18, 18, 0.8);
             border-radius: var(--border-radius);
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 3rem;
+            margin-bottom: 3rem;
             box-shadow: var(--shadow);
             transition: var(--transition);
             position: relative;
             overflow: hidden;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            backdrop-filter: blur(5px);
         }
         
-        section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        section::after {
+        section::before {
             content: "";
             position: absolute;
             top: 0;
             left: 0;
             width: 5px;
             height: 100%;
-            background: var(--primary);
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 102, 255, 0.4);
         }
         
         h2 {
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--primary);
-            font-weight: 600;
+            color: var(--light);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid rgba(0, 102, 255, 0.3);
+            font-size: 2.2rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
-            font-family: 'Montserrat', sans-serif;
+            gap: 1rem;
         }
         
         h2 i {
-            font-size: 1.5rem;
+            font-size: 2rem;
+            color: var(--primary);
         }
         
         ul {
@@ -383,97 +498,269 @@
         }
         
         ul li {
-            padding: 0.8rem 1rem;
-            margin-bottom: 0.5rem;
-            background-color: var(--light);
+            padding: 1.2rem 1.5rem;
+            margin-bottom: 0.8rem;
+            background-color: rgba(40, 40, 40, 0.6);
             border-left: 4px solid var(--primary);
-            border-radius: 0 5px 5px 0;
+            border-radius: 0 var(--border-radius) var(--border-radius) 0;
             display: flex;
             align-items: center;
             transition: var(--transition);
+            border: 1px solid rgba(0, 102, 255, 0.1);
         }
         
         ul li:hover {
-            background-color: #e9ecef;
+            background-color: rgba(60, 60, 60, 0.6);
             transform: translateX(5px);
+            border-color: rgba(0, 102, 255, 0.3);
         }
         
         ul li i {
-            margin-right: 0.8rem;
+            margin-right: 1rem;
             color: var(--primary);
+            font-size: 1.2rem;
         }
         
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
         }
         
         .info-card {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            background: rgba(40, 40, 40, 0.6);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
             transition: var(--transition);
+            border: 1px solid rgba(0, 102, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .info-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
         }
         
         .info-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(0, 102, 255, 0.3);
         }
         
         .info-card h3 {
             color: var(--primary);
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .info-card h3 i {
+            font-size: 1.5rem;
         }
         
         .info-card p {
             color: var(--gray);
-            font-size: 0.95rem;
+            font-size: 1rem;
+            line-height: 1.7;
         }
         
         .price-tag {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 1rem 0;
+            font-size: 3rem;
+            font-weight: 800;
+            color: transparent;
+            margin: 2rem 0;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.8rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            justify-content: center;
         }
         
         .price-tag::before {
             content: "R$";
-            font-size: 1.5rem;
-            opacity: 0.7;
+            font-size: 2rem;
+            opacity: 0.8;
         }
         
         .final-price {
-            font-size: 3rem;
-            color: var(--secondary);
+            font-size: 3.5rem;
+            color: transparent;
             text-align: center;
-            margin: 1.5rem 0;
+            margin: 2rem 0;
             animation: pulse 2s infinite;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: 2px;
         }
         
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.03); }
             100% { transform: scale(1); }
         }
         
+        .progress-container {
+            margin: 3rem 0;
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background: rgba(40, 40, 40, 0.8);
+            border-radius: 6px;
+            overflow: hidden;
+            margin-bottom: 0.8rem;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0;
+            transition: width 1s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .progress::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.2), 
+                transparent);
+            animation: progressShine 2s infinite;
+        }
+        
+        @keyframes progressShine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1rem;
+            color: var(--gray);
+        }
+        
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+            margin: 3rem 0;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2.5rem;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            box-shadow: 0 0 0 5px rgba(18, 18, 18, 0.9);
+            z-index: 1;
+        }
+        
+        .timeline-content {
+            padding-left: 2.5rem;
+        }
+        
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .timeline-date::after {
+            content: "";
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+            margin-left: 1rem;
+        }
+        
+        .timeline-content p {
+            color: var(--gray);
+            line-height: 1.7;
+            background: rgba(40, 40, 40, 0.4);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(0, 102, 255, 0.1);
+        }
+        
+        /* Negociação */
         .negotiation-section {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            border: 2px solid var(--primary);
-            border-radius: 15px;
-            padding: 2rem;
-            margin-top: 2rem;
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            margin-top: 3rem;
             display: none;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(5px);
+        }
+        
+        .negotiation-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDQ1KSI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMCwxMDIsMjU1LDAuMDUpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=');
+            opacity: 0.2;
         }
         
         .negotiation-section.active {
@@ -483,17 +770,38 @@
         }
         
         .negotiation-item {
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(40, 40, 40, 0.6);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            transition: var(--transition);
+        }
+        
+        .negotiation-item:hover {
+            border-color: rgba(0, 102, 255, 0.4);
+            transform: translateY(-3px);
+        }
+        
+        .negotiation-item h4 {
+            color: var(--light);
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .negotiation-item h4 i {
+            color: var(--primary);
+            font-size: 1.5rem;
         }
         
         .slider-container {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 2rem;
         }
         
         .slider {
@@ -501,14 +809,14 @@
             width: 100%;
             height: 10px;
             border-radius: 5px;
-            background: #e9ecef;
+            background: rgba(60, 60, 60, 0.8);
             outline: none;
-            opacity: 0.7;
-            transition: opacity .2s;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 102, 255, 0.2);
         }
         
         .slider:hover {
-            opacity: 1;
+            background: rgba(80, 80, 80, 0.8);
         }
         
         .slider::-webkit-slider-thumb {
@@ -517,95 +825,419 @@
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            box-shadow: 0 2px 10px rgba(0, 102, 255, 0.5);
+            border: 2px solid var(--light);
+            transition: var(--transition);
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
         }
         
         .reduction-value {
             font-weight: bold;
-            color: var(--danger);
-            min-width: 80px;
+            min-width: 120px;
             text-align: right;
+            font-size: 1.1rem;
+            background: linear-gradient(135deg, var(--danger), var(--warning));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: var(--transition);
         }
         
         .negotiation-header {
             text-align: center;
             position: relative;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(0, 102, 255, 0.3);
         }
         
         .negotiation-header h3 {
-            font-size: 2rem;
-            color: var(--primary);
+            font-size: 2.5rem;
+            color: transparent;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            margin-bottom: 1rem;
             animation: textScale 1.5s infinite alternate;
+        }
+        
+        .negotiation-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
         }
         
         @keyframes textScale {
             from { transform: scale(1); }
-            to { transform: scale(1.05); }
+            to { transform: scale(1.03); }
         }
         
         .dynamic-price {
-            font-size: 2.5rem;
+            font-size: 3rem;
             text-align: center;
-            margin: 2rem 0;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            margin: 3rem 0;
+            font-weight: 800;
+            letter-spacing: 2px;
+            transition: var(--transition);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
             animation: pricePulse 2s infinite;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .dynamic-price::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, 
+                rgba(0, 102, 255, 0.1), 
+                rgba(0, 255, 136, 0.1));
+            z-index: -1;
         }
         
         @keyframes pricePulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.7; }
-            100% { opacity: 1; }
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.02); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .action-buttons .btn {
+            flex: 1;
+            min-width: 250px;
+            max-width: 300px;
         }
         
         .confetti {
             position: fixed;
-            width: 10px;
-            height: 10px;
-            background: var(--primary);
+            width: 12px;
+            height: 12px;
             pointer-events: none;
+            z-index: 1000;
+            animation: fall linear forwards;
+        }
+        
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            background: rgba(30, 30, 30, 0.95);
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            max-width: 500px;
+            width: 90%;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            position: relative;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+        
+        .modal.active .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            background: none;
+            border: none;
+            transition: var(--transition);
+        }
+        
+        .close-modal:hover {
+            color: var(--danger);
+            transform: rotate(90deg);
+        }
+        
+        .modal h3 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        
+        .modal p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.9);
+            color: var(--light);
+            text-align: center;
+            padding: 3rem 1rem;
+            margin-top: 5rem;
+            border-top: 1px solid rgba(0, 102, 255, 0.2);
+            position: relative;
+        }
+        
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgcGF0dGVyblRyYW5zZm9ybT0icm90YXRlKDQ1KSI+PHJlY3Qgd2lkdGg9IjUwIiBoZWlnaHQ9IjUwIiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoMCwxMDIsMjU1LDAuMDMpIiBzdHJva2Utd2lkdGg9IjEiLz48L3BhdHRlcm4+PC9kZWZzPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjcGF0dGVybikiLz48L3N2Zz4=');
+            opacity: 0.3;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-content h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--light);
+        }
+        
+        .footer-content h3 span {
+            color: var(--primary);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition);
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-3px);
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .copyright {
+            margin-top: 2rem;
+            opacity: 0.6;
+            font-size: 0.9rem;
+            color: var(--gray);
         }
         
         /* Responsividade */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .logo {
+                height: 80px;
+            }
+            
+            .hospital-icon {
+                font-size: 4rem;
+            }
+            
+            section, .ticket-section, .ticket-display {
+                padding: 2rem;
+            }
+            
+            .ticket-number {
+                font-size: 4rem;
+            }
+            
+            .price-tag, .final-price, .dynamic-price {
+                font-size: 2.5rem;
+            }
+        }
+        
         @media (max-width: 768px) {
             h1 {
                 font-size: 2.2rem;
             }
             
             .subtitle {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
             
-            .ticket-section {
-                padding: 2rem 1rem;
+            .logo-container {
+                gap: 2rem;
+                margin: 2rem 0;
+            }
+            
+            .logo {
+                height: 60px;
+            }
+            
+            .hospital-icon {
+                font-size: 3rem;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            section, .ticket-section, .ticket-display {
+                padding: 1.5rem;
+                margin: 2rem 0;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .ticket-number {
+                font-size: 3.5rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-tag, .final-price, .dynamic-price {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .action-buttons .btn {
+                max-width: 100%;
+            }
+            
+            .timeline {
+                padding-left: 2rem;
+            }
+            
+            .timeline-dot {
+                width: 25px;
+                height: 25px;
+                font-size: 0.8rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
             }
             
             .ticket-number {
                 font-size: 3rem;
             }
             
-            .info-grid {
-                grid-template-columns: 1fr;
+            .price-tag, .final-price, .dynamic-price {
+                font-size: 1.8rem;
+            }
+            
+            .btn {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
             }
         }
         
-        /* Efeitos especiais */
-        .floating {
-            animation: floating 3s ease-in-out infinite;
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         
-        @keyframes floating {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(-50px); }
         }
         
-        .pulse {
-            animation: pulse 2s infinite;
+        /* Efeitos de hover */
+        .hover-glow:hover {
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.5);
+        }
+        
+        /* Efeito de digitação */
+        .typewriter {
+            overflow: hidden;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 2px;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret 0.75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--primary) }
         }
     </style>
 </head>
@@ -616,11 +1248,11 @@
     <!-- Header -->
     <header>
         <div class="header-content">
-            <h1>NOVOSGA</h1>
-            <p class="subtitle">Sistema de Gestão de Atendimento Hospitalar</p>
+            <h1>NOVOSGA PRO</h1>
+            <p class="subtitle">Solução completa para gestão hospitalar de alto desempenho</p>
             <div class="logo-container">
-                <img src="https://cdn.rawgit.com/novosga/art/39bf72ac/dist/logo_1200x630.png" alt="NOVOSGA Logo" class="logo floating">
-                <i class="fas fa-hospital-alt fa-4x pulse" style="color: white;"></i>
+                <img src="https://cdn.rawgit.com/novosga/art/39bf72ac/dist/logo_1200x630.png" alt="NOVOSGA Logo" class="logo">
+                <i class="fas fa-hospital-alt hospital-icon"></i>
             </div>
         </div>
     </header>
@@ -628,230 +1260,231 @@
     <!-- Container principal -->
     <div class="container">
         <!-- Seção de senha -->
-        <section class="ticket-section">
+        <section class="ticket-section hover-glow">
             <div class="ticket-header">
-                <h2><i class="fas fa-ticket-alt"></i> Atendimento Virtual</h2>
-                <p>Preencha os campos abaixo para gerar sua senha de atendimento</p>
+                <h2><i class="fas fa-headset"></i> Atendimento Prioritário</h2>
+                <p>Preencha os campos abaixo para iniciar seu atendimento personalizado</p>
             </div>
             
             <div class="ticket-form" id="ticket-form">
                 <div class="form-group">
-                    <label for="name">Seu Nome</label>
-                    <input type="text" id="name" placeholder="Digite seu nome completo">
+                    <label for="name"><i class="fas fa-user"></i> Seu Nome</label>
+                    <input type="text" id="name" placeholder="Como devemos chamar você?">
                 </div>
                 
                 <div class="form-group">
-                    <label for="specialty">Especialidade</label>
-                    <select id="specialty">
-                        <option value="">Selecione uma especialidade</option>
-                        <option value="TI">Tecnologia da Informação</option>
-                        <option value="ADM">Administração</option>
-                        <option value="SAUDE">Saúde e Enfermagem</option>
-                        <option value="FIN">Financeiro</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="subject">Assunto</label>
+                    <label for="subject"><i class="fas fa-question-circle"></i> Assunto do Atendimento</label>
                     <select id="subject">
-                        <option value="">Selecione um assunto</option>
-                        <option value="otimizar">Otimizar o atendimento do meu hospital</option>
-                        <option value="implantar">Implantar novo sistema</option>
-                        <option value="treinar">Treinamento da equipe</option>
-                        <option value="suporte">Necessidade de suporte</option>
+                        <option value="">Selecione o assunto principal</option>
+                        <option value="otimizar">Otimizar meu sistema de atendimento</option>
+                        <option value="papel">Trocar sistema de papel por tecnologia</option>
+                        <option value="gritaria">Parar de chamar pacientes aos berros</option>
+                        <option value="planilha">Sair do Excel 2003 pra vida real</option>
                     </select>
                 </div>
                 
                 <button class="btn btn-accent" id="generate-ticket">
-                    <i class="fas fa-ticket-alt"></i> Gerar Senha
+                    <i class="fas fa-ticket-alt"></i> Gerar Senha de Atendimento
                 </button>
             </div>
             
             <div class="ticket-display" id="ticket-display">
-                <h3>Sua Senha de Atendimento</h3>
+                <h3>Seu Atendimento Exclusivo</h3>
                 <div class="ticket-number" id="ticket-number">002</div>
                 <div class="ticket-info">
-                    <p><strong>Nome:</strong> <span id="display-name">Fulano de Tal</span></p>
-                    <p><strong>Especialidade:</strong> <span id="display-specialty">Tecnologia da Informação</span></p>
-                    <p><strong>Assunto:</strong> <span id="display-subject">Otimizar o atendimento do meu hospital</span></p>
-                    <p><strong>Data:</strong> <span id="display-date">31/03/2025</span></p>
+                    <p><strong><i class="fas fa-user"></i> Nome:</strong> <span id="display-name">Fulano de Tal</span></p>
+                    <p><strong><i class="fas fa-tag"></i> Assunto:</strong> <span id="display-subject">Otimizar meu sistema de atendimento</span></p>
+                    <p><strong><i class="fas fa-calendar-alt"></i> Data:</strong> <span id="display-date">31/03/2025</span></p>
+                    <p><strong><i class="fas fa-clock"></i> Hora:</strong> <span id="display-time">14:30</span></p>
                 </div>
                 
                 <div class="ticket-history" id="ticket-history">
-                    <h3><i class="fas fa-history"></i> História da Senha #001</h3>
-                    <p>O sistema NOVOSGA foi implementado com sucesso no <strong>Hospital Estadual Leonardo da Vinci</strong>, transformando completamente o fluxo de atendimento da instituição.</p>
+                    <h3><i class="fas fa-trophy"></i> Histórico da Senha #001</h3>
+                    <p>Implementação do NOVOSGA no <strong>Hospital Estadual Leonardo da Vinci</strong> revolucionou o atendimento:</p>
                     
-                    <p>Como resultado:</p>
                     <ul>
-                        <li>Redução de 40% no tempo de espera dos pacientes</li>
-                        <li>Centralização de 5 sistemas diferentes em uma única plataforma</li>
-                        <li>Treinamento de 120 colaboradores em 3 turnos diferentes</li>
-                        <li>Correção de 23 bugs críticos identificados durante a implantação</li>
-                        <li>Suporte contínuo por 6 meses após a implementação</li>
+                        <li><strong>Redução drástica</strong> no tempo de espera - pacientes atendidos em minutos, não horas</li>
+                        <li><strong>Economia de recursos</strong> - técnicos de enfermagem realocados da chamada manual para assistência direta</li>
+                        <li><strong>Fim do "boca a boca"</strong> - sistema automatizado eliminou confusões e gritaria nos corredores</li>
+                        <li><strong>Integração perfeita</strong> com o Núcleo de Atendimento ao Cliente (NAC)</li>
+                        <li><strong>2 anos de operação</strong> sem falhas - sistema robusto e confiável</li>
                     </ul>
                     
-                    <p>Hoje, mais de 2 anos depois, o sistema continua operando com excelência, atendendo mais de 500 pacientes diariamente e integrado com o NAC (Núcleo de Acreditação Clínica).</p>
+                    <p style="margin-top: 1.5rem;"><i class="fas fa-star"></i> <strong>Resultado:</strong> Hospital se tornou referência em eficiência na rede pública.</p>
                 </div>
                 
                 <button class="btn" id="call-ticket">
-                    <i class="fas fa-bell"></i> Chamar Senha para Atendimento
+                    <i class="fas fa-bell"></i> Iniciar Atendimento
                 </button>
             </div>
         </section>
         
         <!-- Seção de orçamento (inicialmente oculta) -->
         <div class="budget-section" id="budget-section">
-            <section id="descricao">
+            <section id="descricao" class="hover-glow">
                 <h2><i class="fas fa-list-check"></i> Escopo do Projeto</h2>
-                <p>Implementação completa do sistema NOVOSGA para otimização do fluxo de atendimento e gestão de pacientes no NOHC.</p>
+                <p>Solução completa de gestão hospitalar personalizada para suas necessidades:</p>
                 
                 <ul>
-                    <li><i class="fas fa-code"></i> Desenvolvimento e personalização do sistema conforme necessidades específicas</li>
-                    <li><i class="fas fa-server"></i> Instalação e configuração em todas as máquinas da rede</li>
-                    <li><i class="fas fa-bug"></i> Testes de estresse e qualidade em ambiente controlado</li>
-                    <li><i class="fas fa-graduation-cap"></i> Treinamento completo da equipe (8 horas)</li>
-                    <li><i class="fas fa-user-tie"></i> Acompanhamento presencial por 3 dias úteis</li>
-                    <li><i class="fas fa-file-contract"></i> Entrega de documentação técnica e de usuário</li>
-                    <li><i class="fas fa-headset"></i> Suporte pós-instalação por 3 meses (remoto e presencial)</li>
-                    <li><i class="fas fa-shield-alt"></i> Garantia de 6 meses para correção de bugs</li>
+                    <li><i class="fas fa-code"></i> <strong>Customização total</strong> - sistema adaptado à sua realidade operacional</li>
+                    <li><i class="fas fa-server"></i> <strong>Implantação completa</strong> - todas as estações de trabalho configuradas</li>
+                    <li><i class="fas fa-bug"></i> <strong>Testes rigorosos</strong> - garantia de performance mesmo em picos de demanda</li>
+                    <li><i class="fas fa-graduation-cap"></i> <strong>Treinamento especializado</strong> - equipe operando com excelência desde o dia 1</li>
+                    <li><i class="fas fa-user-tie"></i> <strong>Acompanhamento presencial</strong> - nossa equipe no local durante a implantação</li>
+                    <li><i class="fas fa-file-contract"></i> <strong>Documentação completa</strong> - técnico e usuário, sempre atualizada</li>
+                    <li><i class="fas fa-headset"></i> <strong>Suporte premium</strong> - 3 meses de assistência integral pós-implantação</li>
+                    <li><i class="fas fa-shield-alt"></i> <strong>Garantia extendida</strong> - 6 meses para correção de qualquer inconsistência</li>
                 </ul>
                 
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-dot">1</div>
                         <div class="timeline-content">
-                            <div class="timeline-date">Fase 1 - Planejamento (1 semana)</div>
-                            <p>Análise de requisitos e planejamento da implementação</p>
+                            <div class="timeline-date">SEMANA 1 - DIAGNÓSTICO E PLANEJAMENTO</div>
+                            <p>Análise detalhada dos fluxos atuais e desenho da solução personalizada com relatório completo de oportunidades de melhoria.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-dot">2</div>
                         <div class="timeline-content">
-                            <div class="timeline-date">Fase 2 - Desenvolvimento (2 semanas)</div>
-                            <p>Customização e adaptação do sistema</p>
+                            <div class="timeline-date">SEMANAS 2-3 - DESENVOLVIMENTO</div>
+                            <p>Customização do sistema para atender suas necessidades específicas, com validações intermediárias.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-dot">3</div>
                         <div class="timeline-content">
-                            <div class="timeline-date">Fase 3 - Implementação (1 semana)</div>
-                            <p>Instalação, configuração e migração de dados</p>
+                            <div class="timeline-date">SEMANA 4 - IMPLANTAÇÃO</div>
+                            <p>Migração segura dos dados, configuração de todos os dispositivos e integração com sistemas existentes.</p>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-dot"></div>
+                        <div class="timeline-dot">4</div>
                         <div class="timeline-content">
-                            <div class="timeline-date">Fase 4 - Treinamento (2 dias)</div>
-                            <p>Capacitação da equipe e entrega da documentação</p>
+                            <div class="timeline-date">SEMANA 5 - TREINAMENTO E ENTREGA</div>
+                            <p>Capacitação da equipe em todos os turnos e entrega formal do projeto com documentação completa.</p>
                         </div>
                     </div>
                 </div>
             </section>
             
-            <section id="orcamento">
-                <h2><i class="fas fa-file-invoice-dollar"></i> Orçamento</h2>
+            <section id="orcamento" class="hover-glow">
+                <h2><i class="fas fa-file-invoice-dollar"></i> Proposta Comercial</h2>
                 
                 <div class="info-grid">
                     <div class="info-card">
-                        <h3>Cliente</h3>
+                        <h3><i class="fas fa-building"></i> Cliente</h3>
                         <p>NOHC - Núcleo de Oncologia e Hematologia do Ceará</p>
                     </div>
                     <div class="info-card">
-                        <h3>Profissionais</h3>
-                        <p>Lukyam Madeira e Aurélio Neto</p>
+                        <h3><i class="fas fa-users"></i> Equipe</h3>
+                        <p>Lukyam Madeira (Coordenador Técnico)<br>Aurélio Neto (Especialista em Implantação)</p>
                     </div>
                     <div class="info-card">
-                        <h3>Data</h3>
+                        <h3><i class="fas fa-calendar-day"></i> Data</h3>
                         <p>31/03/2025</p>
                     </div>
                     <div class="info-card">
-                        <h3>Validade</h3>
+                        <h3><i class="fas fa-clock"></i> Validade</h3>
                         <p>30 dias</p>
                     </div>
                 </div>
                 
-                <div class="price-tag">10.000,00</div>
+                <div class="price-tag">15.000,00</div>
                 
                 <div class="progress-container">
                     <div class="progress-bar">
                         <div class="progress" id="payment-progress"></div>
                     </div>
                     <div class="progress-labels">
-                        <span>Assinatura: R$ 5.000,00</span>
-                        <span>Conclusão: R$ 5.000,00</span>
+                        <span>Assinatura: R$ 7.500,00</span>
+                        <span>Conclusão: R$ 7.500,00</span>
                     </div>
                 </div>
                 
-                <p><strong>Forma de pagamento:</strong> 50% na assinatura do contrato e 50% na conclusão e aceitação do projeto.</p>
+                <p style="margin-top: 2rem;"><strong><i class="fas fa-handshake"></i> Condições:</strong> 50% na assinatura do contrato e 50% na conclusão e aceitação formal do projeto.</p>
             </section>
             
-            <section id="beneficios">
-                <h2><i class="fas fa-star"></i> Benefícios</h2>
+            <section id="beneficios" class="hover-glow">
+                <h2><i class="fas fa-chart-line"></i> Benefícios Tangíveis</h2>
                 
                 <div class="info-grid">
                     <div class="info-card">
-                        <h3><i class="fas fa-clock"></i> Otimização de Tempo</h3>
-                        <p>Redução de até 40% no tempo de atendimento aos pacientes</p>
+                        <h3><i class="fas fa-clock"></i> Eficiência Operacional</h3>
+                        <p>Redução de até 60% no tempo de atendimento, com eliminação de gargalos e processos redundantes.</p>
                     </div>
                     <div class="info-card">
-                        <h3><i class="fas fa-chart-line"></i> Gestão Eficiente</h3>
-                        <p>Controle completo dos fluxos e indicadores de atendimento</p>
+                        <h3><i class="fas fa-money-bill-wave"></i> Economia de Recursos</h3>
+                        <p>Redirecionamento de pessoal para atividades essenciais, reduzindo custos operacionais.</p>
                     </div>
                     <div class="info-card">
-                        <h3><i class="fas fa-users"></i> Experiência do Paciente</h3>
-                        <p>Melhoria significativa na experiência do paciente</p>
+                        <h3><i class="fas fa-heart"></i> Experiência do Paciente</h3>
+                        <p>Atendimento humanizado e organizado, reduzindo estresse e melhorando a satisfação.</p>
                     </div>
                     <div class="info-card">
-                        <h3><i class="fas fa-database"></i> Dados Integrados</h3>
-                        <p>Centralização de informações para melhor tomada de decisão</p>
+                        <h3><i class="fas fa-database"></i> Gestão de Dados</h3>
+                        <p>Relatórios precisos em tempo real para tomada de decisão estratégica.</p>
                     </div>
                 </div>
             </section>
             
-            <section id="negociacao-avancada">
-                <h2><i class="fas fa-handshake"></i> Negociação Personalizada</h2>
+            <section id="negociacao-avancada" class="hover-glow">
+                <h2><i class="fas fa-comments-dollar"></i> Personalize sua Proposta</h2>
+                <p>Adapte o pacote de serviços conforme suas necessidades e orçamento:</p>
                 
-                <button class="btn" id="iniciar-negociacao" style="width: 100%; padding: 1.5rem;">
-                    <i class="fas fa-handshake"></i> Negociar Valor Personalizado
+                <button class="btn" id="iniciar-negociacao" style="margin-top: 2rem;">
+                    <i class="fas fa-sliders-h"></i> Personalizar Valores
                 </button>
 
                 <div class="negotiation-section" id="area-negociacao">
                     <div class="negotiation-header">
-                        <h3>Vamos Negociar! 🚀</h3>
-                        <p>Ajuste os controles abaixo para personalizar seu pacote:</p>
+                        <h3>Personalização Inteligente</h3>
+                        <p>Ajuste os controles abaixo para otimizar custos e benefícios</p>
                     </div>
 
                     <div class="negotiation-item">
-                        <h4><i class="fas fa-user-tie"></i> Acompanhamento Presencial</h4>
+                        <h4><i class="fas fa-user-tie"></i> Dias de Acompanhamento Presencial</h4>
                         <div class="slider-container">
-                            <input type="range" class="slider" id="acompanhamento" min="0" max="3" value="3">
+                            <input type="range" class="slider" id="acompanhamento" min="0" max="5" value="3" step="1">
                             <span class="reduction-value" id="acompanhamento-valor">0% (R$ 0,00)</span>
                         </div>
+                        <p style="margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> Cada dia reduzido desconta R$ 1.200,00 do valor total
+                        </p>
                     </div>
 
                     <div class="negotiation-item">
-                        <h4><i class="fas fa-headset"></i> Meses de Suporte</h4>
+                        <h4><i class="fas fa-headset"></i> Meses de Suporte Pós-Implantação</h4>
                         <div class="slider-container">
-                            <input type="range" class="slider" id="suporte" min="0" max="3" value="3">
+                            <input type="range" class="slider" id="suporte" min="0" max="6" value="3" step="1">
                             <span class="reduction-value" id="suporte-valor">0% (R$ 0,00)</span>
                         </div>
+                        <p style="margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> Cada mês reduzido desconta R$ 1.500,00 do valor total
+                        </p>
                     </div>
 
                     <div class="negotiation-item">
                         <h4><i class="fas fa-graduation-cap"></i> Horas de Treinamento</h4>
                         <div class="slider-container">
-                            <input type="range" class="slider" id="treinamento" min="4" max="8" value="8">
+                            <input type="range" class="slider" id="treinamento" min="4" max="12" value="8" step="1">
                             <span class="reduction-value" id="treinamento-valor">0% (R$ 0,00)</span>
                         </div>
+                        <p style="margin-top: 1rem; color: var(--gray); font-size: 0.9rem;">
+                            <i class="fas fa-info-circle"></i> Cada hora reduzida desconta R$ 250,00 do valor total
+                        </p>
                     </div>
 
                     <div class="dynamic-price" id="preco-dinamico">
-                        R$ 10.000,00
+                        R$ 15.000,00
                     </div>
 
                     <div class="action-buttons">
-                        <button class="btn-success" id="confirmar-negociacao">
-                            <i class="fas fa-check-circle"></i> Confirmar Novo Valor
+                        <button class="btn btn-accent" id="confirmar-negociacao">
+                            <i class="fas fa-check-double"></i> Confirmar Proposta
+                        </button>
+                        <button class="btn" id="reset-negociacao">
+                            <i class="fas fa-undo"></i> Redefinir
                         </button>
                     </div>
                 </div>
@@ -861,7 +1494,8 @@
     
     <footer>
         <div class="footer-content">
-            <h3>NOVOSGA - Sistema de Gestão de Atendimento</h3>
+            <h3>NOVOSGA <span>PRO</span></h3>
+            <p>Soluções avançadas para gestão hospitalar</p>
             <div class="contact-info">
                 <div class="contact-item">
                     <i class="fas fa-phone"></i>
@@ -869,31 +1503,46 @@
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-envelope"></i>
-                    <span>contato@novosga.com.br</span>
+                    <span>pro@novosga.com.br</span>
                 </div>
                 <div class="contact-item">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span>Fortaleza, CE</span>
+                    <span>Fortaleza, CE | Brasil</span>
                 </div>
             </div>
-            <p class="copyright">© 2025 NOVOSGA - Todos os direitos reservados</p>
+            <p class="copyright">© 2025 NOVOSGA PRO. Todos os direitos reservados. Solução certificada para o setor saúde.</p>
         </div>
     </footer>
+    
+    <!-- Modal de confirmação -->
+    <div class="modal" id="confirmation-modal">
+        <div class="modal-content">
+            <button class="close-modal" id="close-modal">&times;</button>
+            <h3><i class="fas fa-check-circle"></i> Proposta Confirmada!</h3>
+            <p>Sua proposta personalizada foi gerada com sucesso.</p>
+            <p id="modal-price" style="font-size: 1.5rem; margin: 1.5rem 0; color: var(--primary);"></p>
+            <p>Entraremos em contato em até 24 horas para formalizar o acordo.</p>
+            <button class="btn" id="modal-close-btn" style="margin-top: 2rem;">
+                <i class="fas fa-thumbs-up"></i> Entendido
+            </button>
+        </div>
+    </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Criar partículas
             const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 50; i++) {
+            for (let i = 0; i < 80; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
                 particle.style.width = `${Math.random() * 10 + 5}px`;
                 particle.style.height = particle.style.width;
                 particle.style.left = `${Math.random() * 100}vw`;
                 particle.style.top = `${Math.random() * 100}vh`;
-                particle.style.animation = `float ${Math.random() * 10 + 5}s linear infinite`;
+                particle.style.animation = `float ${Math.random() * 15 + 5}s linear infinite`;
                 particle.style.animationDelay = `${Math.random() * 5}s`;
                 particle.style.opacity = Math.random() * 0.5 + 0.1;
+                particle.style.background = `hsl(${Math.random() * 60 + 200}, 100%, 70%)`;
                 particlesContainer.appendChild(particle);
             }
             
@@ -905,34 +1554,41 @@
             // Configurar negociação
             const negotiationItems = {
                 acompanhamento: {
-                    max: 3,
+                    max: 5,
                     value: 3,
-                    pricePerDay: 1000,
+                    pricePerDay: 1200,
                     element: document.getElementById('acompanhamento-valor')
                 },
                 suporte: {
-                    max: 3,
+                    max: 6,
                     value: 3,
                     pricePerMonth: 1500,
                     element: document.getElementById('suporte-valor')
                 },
                 treinamento: {
                     min: 4,
-                    max: 8,
+                    max: 12,
                     value: 8,
-                    pricePerHour: 200,
+                    pricePerHour: 250,
                     element: document.getElementById('treinamento-valor')
                 }
             };
 
-            let basePrice = 10000;
+            let basePrice = 15000;
             let currentPrice = basePrice;
+            const dynamicPriceEl = document.getElementById('preco-dinamico');
+            const modalPriceEl = document.getElementById('modal-price');
+            const modal = document.getElementById('confirmation-modal');
+            const closeModalBtn = document.getElementById('close-modal');
+            const modalCloseBtn = document.getElementById('modal-close-btn');
 
-            document.getElementById('iniciar-negociacao').addEventListener('click', function() {
-                const section = document.getElementById('area-negociacao');
-                section.classList.add('active');
-                createConfetti();
-            });
+            function formatPrice(price) {
+                return new Intl.NumberFormat('pt-BR', { 
+                    style: 'currency', 
+                    currency: 'BRL',
+                    minimumFractionDigits: 2
+                }).format(price);
+            }
 
             function updatePrice() {
                 let totalReduction = 0;
@@ -943,96 +1599,132 @@
                 totalReduction += (negotiationItems.treinamento.max - negotiationItems.treinamento.value) * negotiationItems.treinamento.pricePerHour;
 
                 currentPrice = basePrice - totalReduction;
-                if(currentPrice < basePrice * 0.7) {
-                    document.getElementById('preco-dinamico').style.background = 'linear-gradient(45deg, var(--danger), var(--warning))';
+                
+                // Atualizar cor com base no desconto
+                const discountPercentage = (totalReduction / basePrice) * 100;
+                
+                if (discountPercentage > 30) {
+                    dynamicPriceEl.style.background = 'linear-gradient(135deg, var(--danger), var(--warning))';
+                } else if (discountPercentage > 15) {
+                    dynamicPriceEl.style.background = 'linear-gradient(135deg, var(--warning), var(--accent))';
                 } else {
-                    document.getElementById('preco-dinamico').style.background = 'linear-gradient(45deg, var(--primary), var(--secondary))';
+                    dynamicPriceEl.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
                 }
 
-                document.getElementById('preco-dinamico').textContent = 
-                    `R$ ${currentPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                dynamicPriceEl.textContent = formatPrice(currentPrice);
+            }
+
+            function updateSliderValues() {
+                for (const [key, item] of Object.entries(negotiationItems)) {
+                    const slider = document.getElementById(key);
+                    let percentage = 0;
+                    let reduction = 0;
+
+                    if(key === 'treinamento') {
+                        reduction = (item.max - item.value) * item.pricePerHour;
+                        percentage = ((item.max - item.value) / (item.max - item.min)) * 100;
+                    } else {
+                        reduction = (item.max - item.value) * item[`pricePer${key === 'acompanhamento' ? 'Day' : 'Month'}`];
+                        percentage = ((item.max - item.value) / item.max) * 100;
+                    }
+
+                    item.element.textContent = 
+                        `${Math.round(percentage)}% (${formatPrice(reduction)})`;
+                }
             }
 
             function createConfetti() {
-                for(let i = 0; i < 50; i++) {
+                for(let i = 0; i < 100; i++) {
                     const confetti = document.createElement('div');
                     confetti.classList.add('confetti');
                     confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.top = Math.random() * 100 + 'vh';
-                    confetti.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    confetti.style.top = -10 + 'px';
+                    confetti.style.backgroundColor = `hsl(${Math.random() * 60 + 200}, 100%, 70%)`;
                     confetti.style.animation = `fall ${Math.random() * 3 + 2}s linear forwards`;
-                    confetti.style.opacity = '0.7';
+                    confetti.style.animationDelay = `${Math.random() * 0.5}s`;
+                    confetti.style.opacity = '0.8';
+                    confetti.style.width = `${Math.random() * 10 + 5}px`;
+                    confetti.style.height = `${Math.random() * 10 + 5}px`;
+                    confetti.style.borderRadius = `${Math.random() * 50}%`;
                     document.body.appendChild(confetti);
                     
-                    // Remover após animação
                     setTimeout(() => {
                         confetti.remove();
                     }, 3000);
                 }
             }
 
-            // Configurar listeners para os sliders
+            // Event Listeners
+            document.getElementById('iniciar-negociacao').addEventListener('click', function() {
+                const section = document.getElementById('area-negociacao');
+                section.classList.add('active');
+                createConfetti();
+            });
+
             document.querySelectorAll('.slider').forEach(slider => {
                 slider.addEventListener('input', function() {
                     const item = negotiationItems[this.id];
                     item.value = parseInt(this.value);
-                    
-                    // Calcular porcentagem e valor
-                    let percentage = 0;
-                    let reduction = 0;
-
-                    if(this.id === 'treinamento') {
-                        reduction = (item.max - item.value) * item.pricePerHour;
-                        percentage = ((item.max - item.value) / (item.max - item.min)) * 100;
-                    } else {
-                        reduction = (item.max - item.value) * item[`pricePer${this.id === 'acompanhamento' ? 'Day' : 'Month'}`];
-                        percentage = ((item.max - item.value) / item.max) * 100;
-                    }
-
-                    item.element.textContent = 
-                        `${Math.round(percentage)}% (R$ ${reduction.toLocaleString('pt-BR', {minimumFractionDigits: 2})})`;
-
+                    updateSliderValues();
                     updatePrice();
                 });
             });
 
             document.getElementById('confirmar-negociacao').addEventListener('click', function() {
-                document.getElementById('valor-final').textContent = 
-                    `R$ ${currentPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2})}`;
+                modalPriceEl.textContent = formatPrice(currentPrice);
+                modal.classList.add('active');
+                createConfetti();
+            });
+
+            document.getElementById('reset-negociacao').addEventListener('click', function() {
+                negotiationItems.acompanhamento.value = 3;
+                negotiationItems.suporte.value = 3;
+                negotiationItems.treinamento.value = 8;
                 
-                const modal = document.createElement('div');
-                modal.className = 'custom-modal';
-                modal.innerHTML = `
-                    <div class="modal-content">
-                        <h3>Negociação Confirmada! ✅</h3>
-                        <p>Novo valor: R$ ${currentPrice.toLocaleString('pt-BR', {minimumFractionDigits: 2})}</p>
-                        <button onclick="this.parentElement.parentElement.remove()">Fechar</button>
-                    </div>
-                `;
-                document.body.appendChild(modal);
+                document.getElementById('acompanhamento').value = 3;
+                document.getElementById('suporte').value = 3;
+                document.getElementById('treinamento').value = 8;
+                
+                updateSliderValues();
+                updatePrice();
+            });
+
+            closeModalBtn.addEventListener('click', function() {
+                modal.classList.remove('active');
+            });
+
+            modalCloseBtn.addEventListener('click', function() {
+                modal.classList.remove('active');
+            });
+
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
             });
             
             // Gerar senha
             document.getElementById('generate-ticket').addEventListener('click', function() {
                 const name = document.getElementById('name').value;
-                const specialty = document.getElementById('specialty').value;
                 const subject = document.getElementById('subject').value;
                 
-                if(!name || !specialty || !subject) {
+                if(!name || !subject) {
                     alert('Por favor, preencha todos os campos!');
                     return;
                 }
                 
                 // Atualizar display
                 document.getElementById('display-name').textContent = name;
-                document.getElementById('display-specialty').textContent = 
-                    document.querySelector('#specialty option:checked').text;
                 document.getElementById('display-subject').textContent = 
                     document.querySelector('#subject option:checked').text;
                 
                 const today = new Date();
                 document.getElementById('display-date').textContent = 
                     `${today.getDate().toString().padStart(2, '0')}/${(today.getMonth()+1).toString().padStart(2, '0')}/${today.getFullYear()}`;
+                
+                const hours = today.getHours().toString().padStart(2, '0');
+                const minutes = today.getMinutes().toString().padStart(2, '0');
+                document.getElementById('display-time').textContent = `${hours}:${minutes}`;
                 
                 // Mostrar ticket
                 document.getElementById('ticket-form').style.display = 'none';
@@ -1041,9 +1733,9 @@
                 
                 // Efeito de impressão
                 const ticketNumber = document.getElementById('ticket-number');
-                ticketNumber.style.transform = 'scale(0)';
+                ticketNumber.style.transform = 'scale(0) rotate(0deg)';
                 setTimeout(() => {
-                    ticketNumber.style.transition = 'transform 0.5s ease-out';
+                    ticketNumber.style.transition = 'transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
                     ticketNumber.style.transform = 'scale(1) rotate(360deg)';
                 }, 100);
             });
@@ -1051,20 +1743,31 @@
             // Chamar senha para atendimento
             document.getElementById('call-ticket').addEventListener('click', function() {
                 // Efeito de saída
-                document.querySelector('.ticket-section').style.animation = 'fadeOut 0.5s forwards';
+                const ticketSection = document.querySelector('.ticket-section');
+                ticketSection.style.animation = 'fadeOut 0.8s forwards';
                 
                 // Mostrar orçamento após delay
                 setTimeout(() => {
-                    document.querySelector('.ticket-section').style.display = 'none';
+                    ticketSection.style.display = 'none';
                     document.getElementById('budget-section').style.display = 'block';
                     
                     // Animação de entrada do orçamento
                     const sections = document.querySelectorAll('#budget-section section');
                     sections.forEach((section, index) => {
-                        section.style.animation = `fadeInUp 0.5s forwards ${index * 0.2}s`;
+                        section.style.opacity = '0';
+                        section.style.transform = 'translateY(50px)';
+                        setTimeout(() => {
+                            section.style.transition = 'all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+                            section.style.opacity = '1';
+                            section.style.transform = 'translateY(0)';
+                        }, index * 200);
                     });
-                }, 500);
+                }, 800);
             });
+            
+            // Inicializar valores
+            updateSliderValues();
+            updatePrice();
         });
     </script>
 </body>
