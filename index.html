@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0066cc;
-            --primary-dark: #004d99;
-            --secondary: #00cc66;
+            --primary: #1a3e72; /* Azul mais escuro do NOHC */
+            --primary-dark: #0d2b57;
+            --secondary: #d32f2f; /* Vermelho institucional */
             --dark: #333;
             --light: #f8f9fa;
             --gray: #6c757d;
@@ -86,8 +86,11 @@
         
         .logo {
             height: 60px;
-            filter: brightness(0) invert(1);
             transition: var(--transition);
+        }
+        
+        .logo.nohc-logo {
+            filter: brightness(0) invert(1);
         }
         
         .logo:hover {
@@ -283,13 +286,13 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.2);
+            box-shadow: 0 4px 6px rgba(26, 62, 114, 0.2);
         }
         
         button:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 6px 12px rgba(26, 62, 114, 0.3);
         }
         
         button:active {
@@ -307,11 +310,11 @@
         
         .btn-success {
             background: var(--secondary);
-            box-shadow: 0 4px 6px rgba(0, 204, 102, 0.2);
+            box-shadow: 0 4px 6px rgba(211, 47, 47, 0.2);
         }
         
         .btn-success:hover {
-            background: #00b359;
+            background: #b71c1c;
         }
         
         .action-buttons {
@@ -446,7 +449,7 @@
         }
         
         footer {
-            background: var(--dark);
+            background: var(--primary);
             color: white;
             text-align: center;
             padding: 2rem 1rem;
@@ -548,8 +551,8 @@
             <h1>Orçamento para Desenvolvimento do Sistema NOVOSGA</h1>
             <p class="subtitle">Sistema de Gestão de Atendimento - Núcleo de Oncologia e Hematologia do Ceará</p>
             <div class="logo-container">
-                <img src="https://via.placeholder.com/150x60?text=NOVOSGA" alt="NOVOSGA Logo" class="logo">
-                <img src="https://via.placeholder.com/150x60?text=NOHC" alt="NOHC Logo" class="logo">
+                <img src="https://cdn.rawgit.com/novosga/art/39bf72ac/dist/logo_1200x630.png" alt="NOVOSGA Logo" class="logo">
+                <img src="https://nohc.com.br/wp-content/uploads/2022/03/nohc.png" alt="NOHC Logo" class="logo nohc-logo">
             </div>
         </div>
     </header>
@@ -624,15 +627,15 @@
                 </div>
             </div>
             
-            <div class="price-tag">10.000,00</div>
+            <div class="price-tag">15.000,00</div>
             
             <div class="progress-container">
                 <div class="progress-bar">
                     <div class="progress" id="payment-progress"></div>
                 </div>
                 <div class="progress-labels">
-                    <span>Assinatura: R$ 5.000,00</span>
-                    <span>Conclusão: R$ 5.000,00</span>
+                    <span>Assinatura: R$ 7.500,00</span>
+                    <span>Conclusão: R$ 7.500,00</span>
                 </div>
             </div>
             
@@ -670,29 +673,29 @@
                 <div class="form-group">
                     <div class="checkbox-group">
                         <div class="checkbox-item">
-                            <input type="checkbox" name="garantia" id="garantia" value="-1000">
+                            <input type="checkbox" name="garantia" id="garantia" value="-1500">
                             <label for="garantia">Reduzir tempo de garantia de 6 para 3 meses</label>
+                            <span class="price-change">- R$ 1.500,00</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="suporte" id="suporte" value="-1000">
+                            <label for="suporte">Reduzir suporte presencial de 3 para 1 dia</label>
                             <span class="price-change">- R$ 1.000,00</span>
                         </div>
                         <div class="checkbox-item">
-                            <input type="checkbox" name="suporte" id="suporte" value="-500">
-                            <label for="suporte">Reduzir suporte presencial de 3 para 1 dia</label>
-                            <span class="price-change">- R$ 500,00</span>
-                        </div>
-                        <div class="checkbox-item">
-                            <input type="checkbox" name="treinamento" id="treinamento" value="-500">
+                            <input type="checkbox" name="treinamento" id="treinamento" value="-1000">
                             <label for="treinamento">Reduzir treinamento de 8 para 4 horas</label>
-                            <span class="price-change">- R$ 500,00</span>
+                            <span class="price-change">- R$ 1.000,00</span>
                         </div>
                         <div class="checkbox-item">
-                            <input type="checkbox" name="documentacao" id="documentacao" value="-300">
+                            <input type="checkbox" name="documentacao" id="documentacao" value="-500">
                             <label for="documentacao">Documentação apenas técnica (sem manual do usuário)</label>
-                            <span class="price-change">- R$ 300,00</span>
+                            <span class="price-change">- R$ 500,00</span>
                         </div>
                     </div>
                 </div>
                 
-                <div class="final-price" id="valor-final">R$ 10.000,00</div>
+                <div class="final-price" id="valor-final">R$ 15.000,00</div>
                 
                 <div class="action-buttons">
                     <button type="button" id="botao-negociar">
@@ -768,7 +771,7 @@
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             
             negotiateBtn.addEventListener('click', function() {
-                let valorBase = 10000;
+                let valorBase = 15000;
                 
                 checkboxes.forEach(checkbox => {
                     if (checkbox.checked) {
