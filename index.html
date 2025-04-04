@@ -8,14 +8,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a3e72; /* Azul mais escuro do NOHC */
+            --primary: #1a3e72;
             --primary-dark: #0d2b57;
-            --secondary: #d32f2f; /* Vermelho institucional */
+            --secondary: #d32f2f;
             --dark: #333;
             --light: #f8f9fa;
             --gray: #6c757d;
             --danger: #dc3545;
             --warning: #ffc107;
+            --success: #28a745;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
@@ -309,12 +310,12 @@
         }
         
         .btn-success {
-            background: var(--secondary);
-            box-shadow: 0 4px 6px rgba(211, 47, 47, 0.2);
+            background: var(--success);
+            box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2);
         }
         
         .btn-success:hover {
-            background: #b71c1c;
+            background: #218838;
         }
         
         .action-buttons {
@@ -432,6 +433,10 @@
             transform: translateY(0);
         }
         
+        .modal-lg .modal-content {
+            max-width: 700px;
+        }
+        
         .close-modal {
             position: absolute;
             top: 1rem;
@@ -446,6 +451,33 @@
         .modal h3 {
             margin-bottom: 1rem;
             color: var(--primary);
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-number {
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        
+        .value-explanation {
+            background: #f0f7ff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary);
+            margin: 1.5rem 0;
         }
         
         footer {
@@ -605,7 +637,7 @@
             </div>
         </section>
         
-        <section id="orcamento">
+        <section id="orcamento" style="display: none;">
             <h2><i class="fas fa-file-invoice-dollar"></i> Orçamento</h2>
             
             <div class="info-grid">
@@ -673,9 +705,9 @@
                 <div class="form-group">
                     <div class="checkbox-group">
                         <div class="checkbox-item">
-                            <input type="checkbox" name="garantia" id="garantia" value="-500">
+                            <input type="checkbox" name="garantia" id="garantia" value="-1500">
                             <label for="garantia">Reduzir tempo de garantia de 6 para 3 meses</label>
-                            <span class="price-change">- R$ 500,00</span>
+                            <span class="price-change">- R$ 1.500,00</span>
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" name="suporte" id="suporte" value="-1000">
@@ -683,9 +715,9 @@
                             <span class="price-change">- R$ 1.000,00</span>
                         </div>
                         <div class="checkbox-item">
-                            <input type="checkbox" name="treinamento" id="treinamento" value="-500">
+                            <input type="checkbox" name="treinamento" id="treinamento" value="-1000">
                             <label for="treinamento">Substituir o treinamento conjunto de toda a equipe por um único treinamento com um colaborador de sua escolha</label>
-                            <span class="price-change">- R$ 500,00</span>
+                            <span class="price-change">- R$ 1.000,00</span>
                         </div>
                         <div class="checkbox-item">
                             <input type="checkbox" name="documentacao" id="documentacao" value="-500">
@@ -710,6 +742,70 @@
                 </div>
             </form>
         </section>
+    </div>
+
+    <!-- Modal de Explicação do Valor -->
+    <div class="modal" id="value-explanation-modal">
+        <div class="modal-content modal-lg">
+            <button class="close-modal">&times;</button>
+            <h3><i class="fas fa-calculator"></i> Por que R$ 12.000 é um investimento inteligente para seu hospital?</h3>
+            
+            <div style="text-align: left; margin-top: 1.5rem;">
+                <p>Você pode achar R$ 12.000 um valor significativo, mas quando comparado com os custos ocultos dos sistemas atuais, é um dos melhores investimentos que seu hospital pode fazer. Veja alguns exemplos:</p>
+                
+                <div style="margin: 1.5rem 0;">
+                    <div class="benefit-item">
+                        <div class="benefit-number">1</div>
+                        <div>
+                            <strong>Folha de papelaria</strong><br>
+                            Um hospital médio gasta R$ 3.000-5.000/mês apenas com fichas de atendimento, cadastros e impressões. Em 3 meses, você já pagou pelo NOVOSGA - que é permanente.
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-number">2</div>
+                        <div>
+                            <strong>Tempo da equipe</strong><br>
+                            Cada 10 minutos perdidos por atendimento com sistemas manuais custam R$ 8.000/mês em produtividade (para 20 atendimentos/dia). O NOVOSGA paga sozinho em 6 semanas.
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-number">3</div>
+                        <div>
+                            <strong>Sistemas concorrentes</strong><br>
+                            Soluções similares do mercado custam:<br>
+                            - Sistemas "prontos": R$ 25.000-50.000 + mensalidades<br>
+                            - Desenvolvimento customizado: R$ 80.000+<br>
+                            - Grandes fornecedores: contratos de R$ 15.000/mês
+                        </div>
+                    </div>
+                    
+                    <div class="benefit-item">
+                        <div class="benefit-number">4</div>
+                        <div>
+                            <strong>Custo de "não ter"</strong><br>
+                            - 1 reclamação de paciente = R$ 400 em tempo de gestão<br>
+                            - 1 erro de triagem = R$ 1.500 em retrabalho<br>
+                            - 1 processo por má gestão = R$ 50.000+
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="value-explanation">
+                    <p><strong>Nosso diferencial?</strong></p>
+                    <ul style="list-style-type: none;">
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Único pagamento (sem mensalidades escondidas)</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Feito PARA hospitais (não adaptação de sistema genérico)</li>
+                        <li><i class="fas fa-check" style="color: var(--success);"></i> Economia comprovada de R$ 15.000/ano no mínimo</li>
+                    </ul>
+                </div>
+                
+                <button id="understand-value-btn" class="btn-success" style="width: 100%; margin-top: 1.5rem;">
+                    <i class="fas fa-check-circle"></i> Entendi o valor - Mostrar Orçamento
+                </button>
+            </div>
+        </div>
     </div>
     
     <footer>
@@ -743,6 +839,7 @@
                     <label for="name">Nome completo</label>
                     <input type="text" id="name" class="form-control" required>
                 </div>
+                <div class="form
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" class="form-control" required>
@@ -764,6 +861,25 @@
             setTimeout(() => {
                 document.getElementById('payment-progress').style.width = '50%';
             }, 500);
+            
+            // Show value explanation modal first
+            setTimeout(() => {
+                document.getElementById('value-explanation-modal').classList.add('show');
+            }, 1000);
+            
+            // Button to show budget after understanding value
+            document.getElementById('understand-value-btn').addEventListener('click', function() {
+                document.getElementById('value-explanation-modal').classList.remove('show');
+                document.getElementById('orcamento').style.display = 'block';
+                // Smooth scroll to budget section
+                document.getElementById('orcamento').scrollIntoView({ behavior: 'smooth' });
+            });
+            
+            // Close modal and show budget
+            document.querySelector('#value-explanation-modal .close-modal').addEventListener('click', function() {
+                document.getElementById('value-explanation-modal').classList.remove('show');
+                document.getElementById('orcamento').style.display = 'block';
+            });
             
             // Negotiation functionality
             const negotiateBtn = document.getElementById('botao-negociar');
