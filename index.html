@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento - NOVOSGA | NOHC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066cc;
+            --primary-dark: #004d99;
+            --secondary: #00cc66;
+            --dark: #333;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --danger: #dc3545;
+            --warning: #ffc107;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background-color: #f5f7fa;
+            overflow-x: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSg0NSkiPjxyZWN0IHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjA1KSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.5;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 1.5rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .logo {
+            height: 60px;
+            filter: brightness(0) invert(1);
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        section {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        section::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary);
+        }
+        
+        h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        h2 i {
+            font-size: 1.5rem;
+        }
+        
+        ul {
+            list-style-type: none;
+        }
+        
+        ul li {
+            padding: 0.8rem 1rem;
+            margin-bottom: 0.5rem;
+            background-color: var(--light);
+            border-left: 4px solid var(--primary);
+            border-radius: 0 5px 5px 0;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+        
+        ul li:hover {
+            background-color: #e9ecef;
+            transform: translateX(5px);
+        }
+        
+        ul li i {
+            margin-right: 0.8rem;
+            color: var(--primary);
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        
+        .info-card {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+        }
+        
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .info-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .info-card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+        
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 1rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .price-tag::before {
+            content: "R$";
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+        
+        .final-price {
+            font-size: 3rem;
+            color: var(--secondary);
+            text-align: center;
+            margin: 1.5rem 0;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            background: var(--light);
+            border-radius: 8px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .checkbox-item:hover {
+            background: #e9ecef;
+        }
+        
+        .checkbox-item input {
+            margin-right: 1rem;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .checkbox-item label {
+            flex: 1;
+            cursor: pointer;
+        }
+        
+        .checkbox-item .price-change {
+            font-weight: 600;
+            color: var(--danger);
+            margin-left: 1rem;
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0, 102, 204, 0.2);
+        }
+        
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 102, 204, 0.3);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .btn-secondary {
+            background: var(--gray);
+            box-shadow: 0 4px 6px rgba(108, 117, 125, 0.2);
+        }
+        
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+        
+        .btn-success {
+            background: var(--secondary);
+            box-shadow: 0 4px 6px rgba(0, 204, 102, 0.2);
+        }
+        
+        .btn-success:hover {
+            background: #00b359;
+        }
+        
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .timeline::before {
+            content: "";
+            position: absolute;
+            left: 7px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 1.5rem;
+        }
+        
+        .timeline-item:last-child {
+            padding-bottom: 0;
+        }
+        
+        .timeline-dot {
+            position: absolute;
+            left: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+        
+        .timeline-content {
+            padding-left: 1.5rem;
+        }
+        
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.3rem;
+        }
+        
+        .progress-container {
+            margin: 2rem 0;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            width: 0;
+            transition: width 1s ease;
+        }
+        
+        .progress-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .modal.show {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            background: none;
+            border: none;
+        }
+        
+        .modal h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-tag, .final-price {
+                font-size: 2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        section {
+            animation: fadeIn 0.6s ease forwards;
+        }
+        
+        section:nth-child(1) { animation-delay: 0.1s; }
+        section:nth-child(2) { animation-delay: 0.2s; }
+        section:nth-child(3) { animation-delay: 0.3s; }
+        section:nth-child(4) { animation-delay: 0.4s; }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12pt;
+            }
+            
+            header, section {
+                box-shadow: none;
+                margin: 0;
+                padding: 1rem;
+                page-break-inside: avoid;
+            }
+            
+            button, .action-buttons, footer {
+                display: none;
+            }
+            
+            .final-price {
+                color: black;
+                animation: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Orçamento para Desenvolvimento do Sistema NOVOSGA</h1>
+            <p class="subtitle">Sistema de Gestão de Atendimento - Núcleo de Oncologia e Hematologia do Ceará</p>
+            <div class="logo-container">
+                <img src="https://via.placeholder.com/150x60?text=NOVOSGA" alt="NOVOSGA Logo" class="logo">
+                <img src="https://via.placeholder.com/150x60?text=NOHC" alt="NOHC Logo" class="logo">
+            </div>
+        </div>
+    </header>
+    
+    <div class="container">
+        <section id="descricao">
+            <h2><i class="fas fa-list-check"></i> Escopo do Projeto</h2>
+            <p>Implementação completa do sistema NOVOSGA para otimização do fluxo de atendimento e gestão de pacientes no NOHC.</p>
+            
+            <ul>
+                <li><i class="fas fa-code"></i> Desenvolvimento e personalização do sistema conforme necessidades específicas</li>
+                <li><i class="fas fa-server"></i> Instalação e configuração em todas as máquinas da rede</li>
+                <li><i class="fas fa-bug"></i> Testes de estresse e qualidade em ambiente controlado</li>
+                <li><i class="fas fa-graduation-cap"></i> Treinamento completo da equipe (8 horas)</li>
+                <li><i class="fas fa-user-tie"></i> Acompanhamento presencial por 3 dias úteis</li>
+                <li><i class="fas fa-file-contract"></i> Entrega de documentação técnica e de usuário</li>
+                <li><i class="fas fa-headset"></i> Suporte pós-instalação por 3 meses (remoto e presencial)</li>
+                <li><i class="fas fa-shield-alt"></i> Garantia de 6 meses para correção de bugs</li>
+            </ul>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Fase 1 - Planejamento (1 semana)</div>
+                        <p>Análise de requisitos e planejamento da implementação</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Fase 2 - Desenvolvimento (2 semanas)</div>
+                        <p>Customização e adaptação do sistema</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Fase 3 - Implementação (1 semana)</div>
+                        <p>Instalação, configuração e migração de dados</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">Fase 4 - Treinamento (2 dias)</div>
+                        <p>Capacitação da equipe e entrega da documentação</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="orcamento">
+            <h2><i class="fas fa-file-invoice-dollar"></i> Orçamento</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3>Cliente</h3>
+                    <p>NOHC - Núcleo de Oncologia e Hematologia do Ceará</p>
+                </div>
+                <div class="info-card">
+                    <h3>Profissionais</h3>
+                    <p>Lukyam Madeira e Aurélio Neto</p>
+                </div>
+                <div class="info-card">
+                    <h3>Data</h3>
+                    <p>31/03/2025</p>
+                </div>
+                <div class="info-card">
+                    <h3>Validade</h3>
+                    <p>30 dias</p>
+                </div>
+            </div>
+            
+            <div class="price-tag">10.000,00</div>
+            
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress" id="payment-progress"></div>
+                </div>
+                <div class="progress-labels">
+                    <span>Assinatura: R$ 5.000,00</span>
+                    <span>Conclusão: R$ 5.000,00</span>
+                </div>
+            </div>
+            
+            <p><strong>Forma de pagamento:</strong> 50% na assinatura do contrato e 50% na conclusão e aceitação do projeto.</p>
+        </section>
+        
+        <section id="beneficios">
+            <h2><i class="fas fa-star"></i> Benefícios</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3><i class="fas fa-clock"></i> Otimização de Tempo</h3>
+                    <p>Redução de até 40% no tempo de atendimento aos pacientes</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-chart-line"></i> Gestão Eficiente</h3>
+                    <p>Controle completo dos fluxos e indicadores de atendimento</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-users"></i> Experiência do Paciente</h3>
+                    <p>Melhoria significativa na experiência do paciente</p>
+                </div>
+                <div class="info-card">
+                    <h3><i class="fas fa-database"></i> Dados Integrados</h3>
+                    <p>Centralização de informações para melhor tomada de decisão</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="negociacao">
+            <h2><i class="fas fa-handshake"></i> Negociação</h2>
+            <p>Personalize sua proposta selecionando as opções abaixo para ajustar o valor:</p>
+            
+            <form id="form-negociacao">
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="garantia" id="garantia" value="-1000">
+                            <label for="garantia">Reduzir tempo de garantia de 6 para 3 meses</label>
+                            <span class="price-change">- R$ 1.000,00</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="suporte" id="suporte" value="-500">
+                            <label for="suporte">Reduzir suporte presencial de 3 para 1 dia</label>
+                            <span class="price-change">- R$ 500,00</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="treinamento" id="treinamento" value="-500">
+                            <label for="treinamento">Reduzir treinamento de 8 para 4 horas</label>
+                            <span class="price-change">- R$ 500,00</span>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="documentacao" id="documentacao" value="-300">
+                            <label for="documentacao">Documentação apenas técnica (sem manual do usuário)</label>
+                            <span class="price-change">- R$ 300,00</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="final-price" id="valor-final">R$ 10.000,00</div>
+                
+                <div class="action-buttons">
+                    <button type="button" id="botao-negociar">
+                        <i class="fas fa-calculator"></i> Calcular Novo Valor
+                    </button>
+                    <button type="button" id="botao-imprimir" class="btn-secondary">
+                        <i class="fas fa-print"></i> Imprimir Orçamento
+                    </button>
+                    <button type="button" id="botao-contato" class="btn-success">
+                        <i class="fas fa-paper-plane"></i> Enviar Proposta
+                    </button>
+                </div>
+            </form>
+        </section>
+    </div>
+    
+    <footer>
+        <div class="footer-content">
+            <h3>Entre em Contato</h3>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(85) 98765-4321</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>contato@novosga.com.br</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Fortaleza, CE</span>
+                </div>
+            </div>
+            <p class="copyright">© 2025 NOVOSGA - Todos os direitos reservados</p>
+        </div>
+    </footer>
+    
+    <div class="modal" id="contact-modal">
+        <div class="modal-content">
+            <button class="close-modal">&times;</button>
+            <h3>Enviar Proposta</h3>
+            <p>Preencha seus dados para enviarmos a proposta formal:</p>
+            <form id="contact-form">
+                <div class="form-group">
+                    <label for="name">Nome completo</label>
+                    <input type="text" id="name" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Telefone</label>
+                    <input type="tel" id="phone" class="form-control" required>
+                </div>
+                <button type="submit" class="btn-success">
+                    <i class="fas fa-paper-plane"></i> Enviar Proposta
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize payment progress animation
+            setTimeout(() => {
+                document.getElementById('payment-progress').style.width = '50%';
+            }, 500);
+            
+            // Negotiation functionality
+            const negotiateBtn = document.getElementById('botao-negociar');
+            const finalPriceEl = document.getElementById('valor-final');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            
+            negotiateBtn.addEventListener('click', function() {
+                let valorBase = 10000;
+                
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        valorBase += parseInt(checkbox.value);
+                    }
+                });
+                
+                // Format price with Brazilian Real format
+                finalPriceEl.textContent = `R$ ${valorBase.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
+                
+                // Add animation
+                finalPriceEl.style.animation = 'none';
+                void finalPriceEl.offsetWidth; // Trigger reflow
+                finalPriceEl.style.animation = 'pulse 0.5s';
+            });
+            
+            // Print functionality
+            document.getElementById('botao-imprimir').addEventListener('click', function() {
+                window.print();
+            });
+            
+            // Contact modal functionality
+            const contactModal = document.getElementById('contact-modal');
+            const openModalBtn = document.getElementById('botao-contato');
+            const closeModalBtn = document.querySelector('.close-modal');
+            
+            openModalBtn.addEventListener('click', function() {
+                contactModal.classList.add('show');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeModalBtn.addEventListener('click', function() {
+                contactModal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            contactModal.addEventListener('click', function(e) {
+                if (e.target === contactModal) {
+                    contactModal.classList.remove('show');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Contact form submission
+            document.getElementById('contact-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Proposta enviada com sucesso! Entraremos em contato em breve.');
+                contactModal.classList.remove('show');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Add hover effect to checkbox items
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const parent = this.closest('.checkbox-item');
+                    if (this.checked) {
+                        parent.style.backgroundColor = '#f8d7da';
+                    } else {
+                        parent.style.backgroundColor = '';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
